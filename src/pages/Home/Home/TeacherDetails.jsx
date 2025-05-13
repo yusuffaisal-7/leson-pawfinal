@@ -1,0 +1,140 @@
+// import { useQuery } from '@tanstack/react-query';
+// import { useParams, useNavigate } from 'react-router-dom';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
+// const TeacherDetails = () => {
+//   const { tutorId } = useParams(); 
+//   const axiosSecure = useAxiosSecure();
+//   const navigate = useNavigate();
+
+//   const { data: tutor, isLoading, error } = useQuery({
+//     queryKey: ['tutor', tutorId],
+//     queryFn: async () => {
+//       const res = await axiosSecure.get(`/tutors/${tutorId}`);
+//       return res.data;
+//     },
+//   });
+
+//   if (isLoading) return <div className="text-center py-20">Loading...</div>;
+//   if (error) return <div className="text-center text-red-500 py-10">Error: {error.message}</div>;
+//   if (!tutor) return <div className="text-center py-10">Tutor not found</div>;
+
+//   return (
+//     <div className="p-6 max-w-4xl mx-auto">
+//       <button
+//         onClick={() => navigate(-1)}
+//         className="btn btn-outline btn-sm mb-6"
+//       >
+//         Back
+//       </button>
+//       <div className="bg-white rounded-2xl shadow-lg p-8">
+//         <div className="flex flex-col md:flex-row gap-8">
+//           <img
+//             src={tutor.photoURL || 'https://i.ibb.co.com/gxzxFJk/profile12.jpg'}
+//             alt={tutor.name}
+//             className="w-full md:w-1/3 h-64 object-cover rounded-lg"
+//           />
+//           <div className="flex-1">
+//             <h2 className="text-3xl font-bold text-gray-800 mb-4">{tutor.name}</h2>
+//             <p className="text-gray-600 mb-2"><strong>Email:</strong> {tutor.email}</p>
+//             <p className="text-gray-600 mb-2"><strong>Subjects:</strong> {tutor.subjects?.join(', ')}</p>
+//             <p className="text-gray-600 mb-2"><strong>Experience:</strong> {tutor.experience || 0} years</p>
+//             <p className="text-gray-600 mb-2"><strong>Status:</strong> {tutor.status || 'Active'}</p>
+//             {/* Add more details as needed */}
+//             <p className="text-gray-600 mb-2"><strong>Bio:</strong> {tutor.bio || 'No bio available'}</p>
+//             <p className="text-gray-600 mb-2"><strong>Location:</strong> {tutor.location || 'Not specified'}</p>
+//             <p className="text-gray-600 mb-2"><strong>Education:</strong> {tutor.education || 'Not specified'}</p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TeacherDetails;
+
+
+import { useQuery } from '@tanstack/react-query';
+import { useParams, useNavigate } from 'react-router-dom';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useContext } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { AuthContext } from '../../../providers/AuthProvider';
+// import { AuthContext } from '../providers/AuthProvider';
+
+const TeacherDetails = () => {
+  const { tutorId } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const { data: tutor, isLoading, error } = useQuery({
+    queryKey: ['tutor', tutorId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/tutors/${tutorId}`);
+      return res.data;
+    },
+  });
+
+  const handleBookTutor = async () => {
+    if (!user) {
+      alert('Please log in to book a tutor.');
+      navigate('/login');
+      return;
+    }
+    try {
+      await axiosSecure.post('/carts', {
+        email: user.email,
+        tutorId: tutor._id,
+        subject: tutor.subjects[0], // Default to first subject
+      });
+      alert('Tutor booked successfully!');
+      navigate('/dashboard/my-bookings');
+    } catch (error) {
+      console.error('Error booking tutor:', error);
+      alert('Failed to book tutor.');
+    }
+  };
+
+  if (isLoading) return <div className="text-center py-20">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 py-10">Error: {error.message}</div>;
+  if (!tutor) return <div className="text-center py-10">Tutor not found</div>;
+
+  return (
+    <div className="p-6 max-w-4xl mx-auto">
+      <button
+        onClick={() => navigate(-1)}
+        className="btn btn-outline btn-sm mb-6"
+      >
+        Back
+      </button>
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          <img
+            src={tutor.photoURL || 'https://i.ibb.co.com/gxzxFJk/profile12.jpg'}
+            alt={tutor.name}
+            className="w-full md:w-1/3 h-64 object-cover rounded-lg"
+          />
+          <div className="flex-1">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">{tutor.name}</h2>
+            <p className="text-gray-600 mb-2"><strong>Email:</strong> {tutor.email}</p>
+            <p className="text-gray-600 mb-2"><strong>Subjects:</strong> {tutor.subjects?.join(', ')}</p>
+            <p className="text-gray-600 mb-2"><strong>Experience:</strong> {tutor.experience || 0} years</p>
+            <p className="text-gray-600 mb-2"><strong>Status:</strong> {tutor.status || 'Active'}</p>
+            <p className="text-gray-600 mb-2"><strong>Bio:</strong> {tutor.bio || 'No bio available'}</p>
+            <p className="text-gray-600 mb-2"><strong>Location:</strong> {tutor.location || 'Not specified'}</p>
+            <p className="text-gray-600 mb-2"><strong>Education:</strong> {tutor.education || 'Not specified'}</p>
+            <button
+              onClick={handleBookTutor}
+              className="btn btn-primary mt-4"
+            >
+              Book Tutor
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TeacherDetails;

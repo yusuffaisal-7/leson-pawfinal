@@ -200,17 +200,8 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/tutors"
-              className={({ isActive }) =>
-                isActive ? "text-indigo-700 font-bold" : "text-gray-700 hover:text-indigo-500"
-              }
-            >
-              Tutors
-            </NavLink>
-          </li>
-          <li>
+          
+          {/* <li>
             <NavLink
               to="/post-job"
               className={({ isActive }) =>
@@ -219,7 +210,7 @@ const Navbar = () => {
             >
               Post Job
             </NavLink>
-          </li>
+          </li> */}
           {user && (
             <li>
               <NavLink

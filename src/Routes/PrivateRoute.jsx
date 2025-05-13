@@ -4,7 +4,6 @@ import { useContext } from "react";
 
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
-// import { AuthContext } from "../Provider/AuthProvider";
 
 
 const PrivateRoute = ({ children }) => {

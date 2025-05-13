@@ -1,9 +1,13 @@
 import React from 'react';
+import Teacher from './Teacher';
+import TutorRating from '../../Dashboard/TutorRating/TutorRating';
 
 const Home = () => {
     return (
         <div>
-            <h2>This is Home</h2>
+          <Teacher></Teacher>
+
+          <TutorRating></TutorRating>
         </div>
     );
 };
