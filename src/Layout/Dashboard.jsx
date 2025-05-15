@@ -244,7 +244,7 @@ import { FaEdit } from "react-icons/fa";
 
 import { AuthContext } from "../providers/AuthProvider";
 import useAdmin from "../hooks/UseAdmin";
-import useTeacher from "./../hooks/UseTeacher";
+import useTeacher from "../hooks/UseTeacher";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -254,6 +254,14 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-screen">
+      {/* Sidebar Toggle Button (Mobile) */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="md:hidden fixed top-4 left-4 bg-primary text-white p-2 rounded-lg z-50"
+      >
+        <FaBars />
+      </button>
+
       {/* Sidebar */}
       <div
         className={`fixed md:relative bg-primary text-white h-full w-64 transition-all duration-300 ${
@@ -272,50 +280,67 @@ const Dashboard = () => {
         </div>
 
         <ul className="space-y-3">
+          {/* Student Routes */}
           {user && !isAdmin && !isTeacher && (
             <>
               <li>
                 <NavLink
                   to="/dashboard/studentProfile"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  Profile
+                  <FaUser /> Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/my-bookings"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  my booking
+                  <FaUser /> My Bookings
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/joinTeacher"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  Join as a Teacher
+                  <FaUser /> Join as a Teacher
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/tutor"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/tutors"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  All Tutors
+                  <FaUser /> All Tutors
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/post-job"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  Post Job
+                  <FaPlusCircle /> Post Job
                 </NavLink>
               </li>
             </>
@@ -327,168 +352,184 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="/dashboard/teacherProfile"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  Manage Profile
+                  <FaUser /> Manage Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/manage-subjects"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaBook />
-                  Manage Subjects
+                  <FaBook /> Manage Subjects
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/manage-locations"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaMapMarkerAlt />
-                  Manage Locations
+                  <FaMapMarkerAlt /> Manage Locations
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/tutor-jobs"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaBriefcase />
-                  Available Jobs
+                  <FaBriefcase /> Available Jobs
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/manage-services"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaEdit />
-                  Manage Services
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/services"
-                  className="flex items-center gap-2 hover:text-yellow-300"
-                >
-                  <FaEdit />
-                  Services Need For Student
+                  <FaEdit /> Manage Services
                 </NavLink>
               </li>
             </>
           )}
 
+          {/* Admin Routes */}
           {isAdmin && user && (
             <>
               <li>
                 <NavLink
                   to="/dashboard/manage-users"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaTasks />
-                  Manage Users
+                  <FaTasks /> Manage Users
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/tutor"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/tutors"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUser />
-                  All Tutors
+                  <FaUser /> All Tutors
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/adminHome"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/message"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaHome />
-                  Admin Home
+                  <FaHome /> Show Messages
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/add-tutor"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaUserPlus />
-                  Add Tutor
+                  <FaUserPlus /> Add Tutor
                 </NavLink>
               </li>
-
               <li>
                 <NavLink
-                  to="/dashboard/teacher-verification"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/teacher-applications"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaCheckCircle />
-                  Teacher Verifications
+                  <FaCheckCircle /> Teacher Applications
                 </NavLink>
               </li>
-
               <li>
                 <NavLink
                   to="/dashboard/manage-payments"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaMoneyBillWave />
-                  Manage Payments
+                  <FaMoneyBillWave /> Manage Payments
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/admin-analytics"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaChartBar />
-                  Analytics
+                  <FaChartBar /> Analytics
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/notifications"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/students"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaBell />
-                  Notifications
+                  <FaBell />students
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/services"
-                  className="flex items-center gap-2 hover:text-yellow-300"
+                  to="/dashboard/all-jobs"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-yellow-300 ${
+                      isActive ? "text-yellow-300" : ""
+                    }`
+                  }
                 >
-                  <FaEdit />
-                  Services Need For Student
+                  <FaPlusCircle /> Show All Jobs
                 </NavLink>
               </li>
             </>
           )}
-
-          <li>
-            <NavLink
-              to="/dashboard/intro"
-              className="flex items-center gap-2 hover:text-yellow-300"
-            >
-              <FaPlusCircle />
-              Introduced to Dashboard
-            </NavLink>
-          </li>
         </ul>
       </div>
 
-      <div className="flex-1 min-h-screen bg-gray-100 p-6 overflow-auto">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="md:hidden fixed top-4 left-4 bg-primary text-white p-2 rounded-lg z-50"
-        >
-          <FaBars />
-        </button>
-
+      {/* Main Content */}
+      <div className="flex-1 min-h-screen bg-gray-100 p-6 overflow-auto md:ml-64">
         <Outlet />
       </div>
     </div>
