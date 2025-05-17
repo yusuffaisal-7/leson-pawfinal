@@ -5,8 +5,9 @@ import useAuth from "./UseAuth";
 
 // Create Axios instance
  const AxiosSecure = axios.create({
-  // baseURL: "https://lesson-paw-server.vercel.app", 
-  baseURL: "http://localhost:5000", 
+  baseURL: "https://lesson-paw-server.vercel.app", 
+  // baseURL: "http://localhost:5000", 
+  // baseURL: 'https://lesson-paw-server-ms63iv0cf-rayhan557s-projects.vercel.app'
 });
 
 // Custom hook to use the Axios instance

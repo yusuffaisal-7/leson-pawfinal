@@ -386,6 +386,7 @@ import ShowAllMessage from "../pages/Dashboard/ShowAllMessage/ShowAllMessage";
 import ShowTeachersApplication from "../pages/Dashboard/ShowTeachersApplication/ShowTeachersApplication";
 import useAdmin from "../hooks/UseAdmin";
 import ShowStudent from "../pages/Dashboard/ShowStudent/ShowStudent";
+import ShowAllService from "../pages/Dashboard/ShowAllService/ShowAllService";
 
 // Custom wrapper to restrict routes to admins
 const AdminRoute = ({ children }) => {
@@ -526,6 +527,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ShowAllMessage />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "service",
+        element: (
+          <AdminRoute>
+            <ShowAllService></ShowAllService>
           </AdminRoute>
         ),
       },
