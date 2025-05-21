@@ -342,10 +342,12 @@ import {
   FaChartBar, FaBriefcase, FaEdit, FaPlusCircle, FaSignOutAlt, FaSearch
 } from "react-icons/fa";
 
-import useAdmin from "../hooks/UseAdmin";
-import useTeacher from "../hooks/UseTeacher";
+
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
+import useAdmin from "../hooks/UseAdmin";
+import useTeacher from '../hooks/useTeacher';
+
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -461,6 +463,7 @@ const Dashboard = () => {
         <ul className="space-y-2">
           {user && !isAdmin && !isTeacher && (
             <>
+              {renderNavLink("/", <FaHome />, "Home")}
               {renderNavLink("/dashboard/studentProfile", <FaUser />, "Profile")}
               {renderNavLink("/dashboard/my-bookings", <FaBook />, "My Bookings")}
               {renderNavLink("/dashboard/joinTeacher", <FaUserPlus />, "Join as a Teacher")}
@@ -470,6 +473,7 @@ const Dashboard = () => {
 
           {user && isTeacher && (
             <>
+              {renderNavLink("/", <FaHome />, "Home")}
               {renderNavLink("/dashboard/teacherProfile", <FaUser />, "Manage Profile")}
               {renderNavLink("/dashboard/tutor-jobs", <FaBriefcase />, "Available Jobs")}
               {renderNavLink("/dashboard/manage-services", <FaEdit />, "Manage Services")}
@@ -478,6 +482,7 @@ const Dashboard = () => {
 
           {user && isAdmin && (
             <>
+              {renderNavLink("/", <FaHome />, "Home")}
               {renderNavLink("/dashboard/manage-users", <FaTasks />, "Manage Users")}
               {renderNavLink("/dashboard/tutors", <FaUser />, "All Tutors")}
               {renderNavLink("/dashboard/message", <FaHome />, "Show Messages")}

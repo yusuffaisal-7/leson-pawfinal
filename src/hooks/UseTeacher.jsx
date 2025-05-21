@@ -14,7 +14,7 @@ const useTeacher = () => {
             return res.data?.teacher;
         }
 
-        // enabled: !!user?.email, 
+      
     });
 
     return [isTeacher, isTeacherLoading];

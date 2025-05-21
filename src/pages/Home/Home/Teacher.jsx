@@ -71,6 +71,8 @@
 
 // export default Teacher;
 
+
+
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
@@ -176,3 +178,4 @@ const Teacher = () => {
 };
 
 export default Teacher;
+

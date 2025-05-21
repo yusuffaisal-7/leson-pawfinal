@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-blue-600 via-purple-500 to-indigo-600 text-white py-6 mt-10">
@@ -55,3 +56,90 @@ const Footer = () => {
 };
 
 export default Footer;
+
+// import { useContext, useState } from "react";
+// import useAxiosPublic from "../../hooks/UseAxiosPublic";
+// import { AuthContext } from "../../providers/AuthProvider";
+
+// const Footer = () => {
+//   const [message, setMessage] = useState("");
+//    const { user } = useContext(AuthContext); 
+//   const axiosSecure = useAxiosPublic();
+
+//   const handleSendMessage = async (e) => {
+//     e.preventDefault();
+//     if (!message.trim()) {
+//       return Swal.fire("Error", "Please enter a message", "error");
+//     }
+//     try {
+//       await axiosSecure.post("/send-message", {
+//         message,
+//         email: user?.email,
+//       });
+//       setMessage("");
+//       Swal.fire("Sent", "Message sent", "success");
+//     } catch (error) {
+//       Swal.fire(
+//         "Error",
+//         error.response?.data?.message || "Failed to send message",
+//         "error"
+//       );
+//     }
+//   };
+
+//   return (
+//     <footer className="bg-base-200 text-base-content p-10">
+//       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+//         {/* Footer Columns */}
+//         <div>
+//           <span className="footer-title">Services</span>
+//           <a className="link link-hover">Branding</a>
+//           <a className="link link-hover">Design</a>
+//           <a className="link link-hover">Marketing</a>
+//           <a className="link link-hover">Advertisement</a>
+//         </div>
+//         <div>
+//           <span className="footer-title">Company</span>
+//           <a className="link link-hover">About us</a>
+//           <a className="link link-hover">Contact</a>
+//           <a className="link link-hover">Jobs</a>
+//           <a className="link link-hover">Press kit</a>
+//         </div>
+//         <div>
+//           <span className="footer-title">Legal</span>
+//           <a className="link link-hover">Terms of use</a>
+//           <a className="link link-hover">Privacy policy</a>
+//           <a className="link link-hover">Cookie policy</a>
+//         </div>
+
+//         {/* Job Form Preview */}
+//         <div className="mt-10 md:mt-0">
+//           <h3 className="text-xl font-semibold mb-2">Job Form Preview</h3>
+//           <img
+//             src="https://via.placeholder.com/600x400.png?text=Job+Form+Preview"
+//             alt="Job Form Preview"
+//             className="w-full h-auto rounded-lg shadow-md"
+//           />
+//           <form onSubmit={handleSendMessage} className="space-y-3 mt-4">
+//             <textarea
+//               value={message}
+//               onChange={(e) => setMessage(e.target.value)}
+//               className="textarea textarea-bordered w-full"
+//               placeholder="Write a message..."
+//               rows={3}
+//             />
+//             <button type="submit" className="btn btn-secondary">
+//               Send Message
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+
+//       <div className="mt-10 text-center text-sm">
+//         © {new Date().getFullYear()} Your Company. All rights reserved.
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
