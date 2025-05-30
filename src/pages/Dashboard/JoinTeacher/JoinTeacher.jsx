@@ -146,7 +146,7 @@
 import React, { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../providers/AuthProvider";
-import useAxiosSecure from "../../../hooks/useAxiosSecure"; // Changed to useAxiosSecure
+import useAxiosSecure from "../../../hooks/useAxiosSecure"; 
 
 const JoinTeacher = () => {
   const { user } = useContext(AuthContext);
@@ -291,3 +291,4 @@ const JoinTeacher = () => {
 };
 
 export default JoinTeacher;
+

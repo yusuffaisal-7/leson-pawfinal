@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { app } from '../firebase/firebase.config';
 import useAxiosPublic from '../hooks/UseAxiosPublic';
 
@@ -29,6 +29,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signOut(auth);
     };
+  
+    const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+};
 
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
@@ -80,6 +85,7 @@ const AuthProvider = ({ children }) => {
         logOut,
         updateUserProfile,
         googleSignIn,
+        resetPassword, 
     };
 
     return (

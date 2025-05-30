@@ -348,6 +348,8 @@
 // ]);
 
 
+// 
+
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
@@ -387,6 +389,13 @@ import ShowTeachersApplication from "../pages/Dashboard/ShowTeachersApplication/
 import useAdmin from "../hooks/UseAdmin";
 import ShowStudent from "../pages/Dashboard/ShowStudent/ShowStudent";
 import ShowAllService from "../pages/Dashboard/ShowAllService/ShowAllService";
+import AddStory from "../pages/Dashboard/AddStory/AddStory";
+import Blog from "../pages/Blog/Blog";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import ManageStories from "../pages/Dashboard/ManageStories/ManageStories";
+import AddBlog from "../pages/Dashboard/AddBlog/AddBlog";
+import AllBlog from "../pages/Dashboard/AllBlog/AllBlog";
+
 
 // Custom wrapper to restrict routes to admins
 const AdminRoute = ({ children }) => {
@@ -409,10 +418,10 @@ export const router = createBrowserRouter([
         path: "/tutor/:tutorId",
         element: <TeacherDetails />,
       },
-      {
-        path: "toristProfile", // Likely a typo, should be "touristProfile" or similar
-        element: <StudentProfile />,
-      },
+      // {
+      //   path: "toristProfile", 
+      //   element: <StudentProfile />,
+      // },
       {
         path: "login",
         element: <Login />,
@@ -420,6 +429,14 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
+      },
+      {
+        path: "blog",
+        element: <Blog></Blog>,
+      },
+      {
+        path: "about",
+        element: <AboutUs></AboutUs>,
       },
     ],
   },
@@ -559,6 +576,38 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminAnalytics />
+          </AdminRoute>
+        ),
+      },
+       {
+        path: "story",
+        element: (
+          <AdminRoute>
+            <AddStory></AddStory>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageStory",
+        element: (
+          <AdminRoute>
+           <ManageStories></ManageStories>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addBlog",
+        element: (
+          <AdminRoute>
+           <AddBlog></AddBlog>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "editBlog",
+        element: (
+          <AdminRoute>
+           <AllBlog></AllBlog>
           </AdminRoute>
         ),
       },

@@ -331,24 +331,7 @@ const PostJob = () => {
     mutation.mutate(jobData);
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!message.trim()) {
-      return Swal.fire("Error", "Please enter a message", "error");
-    }
-    try {
-      await axiosSecure.post("/send-message", { message, email: user?.email });
-      setMessage("");
-      Swal.fire("Sent", "Message sent", "success");
-    } catch (error) {
-      Swal.fire(
-        "Error",
-        error.response?.data?.message || "Failed to send message",
-        "error"
-      );
-    }
-  };
-
+  
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
@@ -464,10 +447,7 @@ const PostJob = () => {
             </div>
           )}
 
-          {/* <div className="form-control">
-            <label className="label">When are you available for sessions?</label>
-            <input type="datetime-local" {...register('availability')} className="input input-bordered" />
-          </div> */}
+         
 
           <div className="form-control">
             <label className="label">
@@ -613,29 +593,12 @@ const PostJob = () => {
           </div>
         </form>
 
-        {/* Job Preview & Messaging Section */}
-        <div className="mt-10">
-          <h3 className="text-xl font-semibold mb-2">Job Form Preview</h3>
-          <img
-            src="https://via.placeholder.com/600x400.png?text=Job+Form+Preview"
-            alt="Job Form Preview"
-            className="w-full h-auto rounded-lg shadow-md"
-          />
-          <form onSubmit={handleSendMessage} className="space-y-3 mt-4">
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="textarea textarea-bordered w-full"
-              placeholder="Write a message..."
-            />
-            <button type="submit" className="btn btn-secondary">
-              Send Message
-            </button>
-          </form>
-        </div>
+       
       </div>
     </motion.div>
   );
 };
 
 export default PostJob;
+
+

@@ -3,6 +3,9 @@ import Teacher from './Teacher';
 import TutorRating from '../../Dashboard/TutorRating/TutorRating';
 import Banner from './Banner';
 import ExploreAbout from './ExploreAbout';
+import SuccessStories from './SuccessStories';
+import Message from './Message';
+import ManageStories from '../../Dashboard/ManageStories/ManageStories';
 
 const Home = () => {
     return (
@@ -10,8 +13,10 @@ const Home = () => {
           <Banner></Banner>
           <ExploreAbout></ExploreAbout>
           <Teacher></Teacher>
-
-          <TutorRating></TutorRating>
+            <SuccessStories></SuccessStories>
+            <Message></Message>
+            
+          {/* <TutorRating></TutorRating> */}
         </div>
     );
 };
