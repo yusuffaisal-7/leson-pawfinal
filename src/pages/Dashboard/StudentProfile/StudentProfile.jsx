@@ -1,5 +1,6 @@
-// import React, { useState, useContext, useEffect } from 'react';
 
+
+// import React, { useState, useContext, useEffect } from 'react';
 // import { AuthContext } from '../../../providers/AuthProvider';
 // import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 // import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -59,7 +60,7 @@
 //         fullName: student.fullName || '',
 //         photoURL: student.photoURL || user?.photoURL || '',
 //         email: user?.email || '',
-//         dateOfBirth: student.dateOfBirth || '',
+//         dateOfBirth: student.dateOfBirth ? new Date(student.dateOfBirth).toISOString().split('T')[0] : '',
 //         gender: student.gender || '',
 //         contactNumber: student.contactNumber || '',
 //         institution: student.institution || '',
@@ -151,227 +152,241 @@
 //       return;
 //     }
 
+//     const dob = new Date(formData.dateOfBirth);
+//     if (isNaN(dob) || dob >= new Date()) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Invalid Date',
+//         text: 'Date of Birth must be a valid date in the past.',
+//       });
+//       return;
+//     }
+
 //     mutation.mutate(formData);
 //   };
 
 //   // Handle loading and error states
 //   if (studentLoading) {
-//     return <p className="text-center mt-10">Loading...</p>;
+//     return (
+//       <div className="flex items-center justify-center py-20">
+//         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+//       </div>
+//     );
 //   }
 
 //   if (!user?.email) {
 //     return (
-//       <p className="text-center text-red-500 mt-10">
-//         Error: Please log in to view your profile.
-//         <br />
+//       <div className="text-center py-10">
+//         <p className="text-red-500 text-lg font-semibold">Please log in to view your profile.</p>
 //         <button
-//           onClick={() => window.location.reload()}
-//           className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+//           onClick={() => window.location.href = '/login'}
+//           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
 //         >
-//           Retry
+//           Go to Login
 //         </button>
-//       </p>
+//       </div>
 //     );
 //   }
 
 //   if (studentError) {
 //     return (
-//       <p className="text-center text-red-500 mt-10">
-//         Error: {studentError?.response?.data?.message || 'Failed to load profile data.'}
-//         <br />
+//       <div className="text-center py-10">
+//         <p className="text-red-500 text-lg font-semibold">
+//           Error: {studentError?.response?.data?.message || 'Failed to load profile data.'}
+//         </p>
 //         <button
 //           onClick={() => window.location.reload()}
-//           className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+//           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
 //         >
 //           Retry
 //         </button>
-//       </p>
+//       </div>
 //     );
 //   }
 
 //   return (
 //     <div className="max-w-4xl mx-auto p-6">
-//       <h2 className="text-2xl font-bold mb-4">Student Profile</h2>
+//       <h2 className="text-3xl font-bold mb-6 text-gray-800">Student Profile</h2>
 
-//       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg">
 //         <div>
-//           <label className="block font-semibold">Full Name</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Full Name</label>
 //           <input
 //             type="text"
 //             name="fullName"
 //             value={formData.fullName}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Photo URL</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Photo URL</label>
 //           <input
 //             type="text"
 //             name="photoURL"
 //             value={formData.photoURL}
 //             onChange={handleChange}
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Email</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Email</label>
 //           <input
 //             type="email"
 //             name="email"
 //             value={formData.email}
 //             disabled
-//             className="w-full border p-2 rounded disabled:bg-gray-100"
+//             className="w-full border p-2 rounded-lg bg-gray-100 cursor-not-allowed"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Date of Birth</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Date of Birth</label>
 //           <input
 //             type="date"
 //             name="dateOfBirth"
 //             value={formData.dateOfBirth}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Gender</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Gender</label>
 //           <input
 //             type="text"
 //             name="gender"
 //             value={formData.gender}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Contact Number</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Contact Number</label>
 //           <input
 //             type="text"
 //             name="contactNumber"
 //             value={formData.contactNumber}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Institution</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Institution</label>
 //           <input
 //             type="text"
 //             name="institution"
 //             value={formData.institution}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Student ID</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Student ID</label>
 //           <input
 //             type="text"
 //             name="studentId"
 //             value={formData.studentId}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Grade/Year of Study</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Grade/Year of Study</label>
 //           <input
 //             type="text"
 //             name="gradeYearOfStudy"
 //             value={formData.gradeYearOfStudy}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Permanent Address</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Permanent Address</label>
 //           <input
 //             type="text"
 //             name="permanentAddress"
 //             value={formData.permanentAddress}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Current Address</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Current Address</label>
 //           <input
 //             type="text"
 //             name="currentAddress"
 //             value={formData.currentAddress}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">City/State/Country</label>
+//           <label className="block font-semibold text-gray-700 mb-1">City/State/Country</label>
 //           <input
 //             type="text"
 //             name="cityStateCountry"
 //             value={formData.cityStateCountry}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">ZIP/Postal Code</label>
+//           <label className="block font-semibold text-gray-700 mb-1">ZIP/Postal Code</label>
 //           <input
 //             type="text"
 //             name="zipPostalCode"
 //             value={formData.zipPostalCode}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Guardian Name</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Name</label>
 //           <input
 //             type="text"
 //             name="guardianName"
 //             value={formData.guardianName}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Guardian Contact Number</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Contact Number</label>
 //           <input
 //             type="text"
 //             name="guardianContactNumber"
 //             value={formData.guardianContactNumber}
 //             onChange={handleChange}
 //             required
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 //         <div>
-//           <label className="block font-semibold">Guardian Email</label>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Email</label>
 //           <input
 //             type="email"
 //             name="guardianEmail"
 //             value={formData.guardianEmail}
 //             onChange={handleChange}
-//             className="w-full border p-2 rounded"
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 //           />
 //         </div>
 
-//         <div className="col-span-2">
+//         <div className="col-span-2 flex justify-end">
 //           <button
 //             type="submit"
-//             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+//             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300"
 //             disabled={mutation.isLoading}
 //           >
 //             {mutation.isLoading ? 'Saving...' : 'Save Profile'}
@@ -379,60 +394,128 @@
 //         </div>
 //       </form>
 
-//       {student && (
-//         <div className="mt-10 border-t pt-6">
-//           <h3 className="text-xl font-semibold mb-4">Current Profile</h3>
-//           {student.photoURL && (
-//             <img
-//               src={student.photoURL}
-//               alt="Student"
-//               className="w-32 h-32 rounded-full mb-4"
-//               onError={(e) => (e.target.src = 'https://via.placeholder.com/150')}
-//             />
-//           )}
-//           <ul className="mt-4 space-y-2">
-//             <li><strong>ID:</strong> {student._id || 'Not provided'}</li>
-//             <li><strong>Name:</strong> {student.fullName || 'Not provided'}</li>
-//             <li><strong>Email:</strong> {student.email || 'Not provided'}</li>
-//             <li>
-//               <strong>DOB:</strong>{' '}
-//               {student.dateOfBirth
-//                 ? new Date(student.dateOfBirth).toLocaleDateString()
-//                 : 'Not provided'}
-//             </li>
-//             <li><strong>Gender:</strong> {student.gender || 'Not provided'}</li>
-//             <li><strong>Contact:</strong> {student.contactNumber || 'Not provided'}</li>
-//             <li><strong>Institution:</strong> {student.institution || 'Not provided'}</li>
-//             <li><strong>Student ID:</strong> {student.studentId || 'Not provided'}</li>
-//             <li><strong>Grade/Year:</strong> {student.gradeYearOfStudy || 'Not provided'}</li>
-//             <li>
-//               <strong>Permanent Address:</strong> {student.permanentAddress || 'Not provided'}
-//             </li>
-//             <li><strong>Current Address:</strong> {student.currentAddress || 'Not provided'}</li>
-//             <li>
-//               <strong>City/State/Country:</strong> {student.cityStateCountry || 'Not provided'}
-//             </li>
-//             <li><strong>Zip Code:</strong> {student.zipPostalCode || 'Not provided'}</li>
-//             <li><strong>Guardian Name:</strong> {student.guardianName || 'Not provided'}</li>
-//             <li>
-//               <strong>Guardian Phone:</strong> {student.guardianContactNumber || 'Not provided'}
-//             </li>
-//             <li><strong>Guardian Email:</strong> {student.guardianEmail || 'Not provided'}</li>
-//             <li>
-//               <strong>Created At:</strong>{' '}
-//               {student.createdAt
-//                 ? new Date(student.createdAt).toLocaleString()
-//                 : 'Not provided'}
-//             </li>
-//             <li>
-//               <strong>Updated At:</strong>{' '}
-//               {student.updatedAt
-//                 ? new Date(student.updatedAt).toLocaleString()
-//                 : 'Not provided'}
-//             </li>
-//           </ul>
-//         </div>
-//       )}
+//       <div className="mt-10">
+//         <h3 className="text-2xl font-semibold mb-6 text-gray-800">Current Profile</h3>
+//         {student ? (
+//           <div className="bg-white rounded-xl shadow-lg p-6">
+//             <div className="flex items-center mb-6">
+//               {student.photoURL ? (
+//                 <img
+//                   src={student.photoURL}
+//                   alt="Student"
+//                   className="w-24 h-24 rounded-full mr-4 object-cover"
+//                   onError={(e) => (e.target.src = 'https://via.placeholder.com/150')}
+//                 />
+//               ) : (
+//                 <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+//                   <span className="text-gray-500">No Image</span>
+//                 </div>
+//               )}
+//               <div>
+//                 <h4 className="text-xl font-bold text-gray-800">{student.fullName || 'Not provided'}</h4>
+//                 <p className="text-gray-600">{student.email || 'Not provided'}</p>
+//               </div>
+//             </div>
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>DOB:</strong> {student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+//                 </svg>
+//                 <span><strong>Gender:</strong> {student.gender || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+//                 </svg>
+//                 <span><strong>Contact:</strong> {student.contactNumber || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Institution:</strong> {student.institution || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+//                 </svg>
+//                 <span><strong>Student ID:</strong> {student.studentId || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+//                 </svg>
+//                 <span><strong>Grade/Year:</strong> {student.gradeYearOfStudy || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Permanent Address:</strong> {student.permanentAddress || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Current Address:</strong> {student.currentAddress || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+//                 </svg>
+//                 <span><strong>City/State/Country:</strong> {student.cityStateCountry || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+//                 </svg>
+//                 <span><strong>Zip Code:</strong> {student.zipPostalCode || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+//                 </svg>
+//                 <span><strong>Guardian Name:</strong> {student.guardianName || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+//                 </svg>
+//                 <span><strong>Guardian Phone:</strong> {student.guardianContactNumber || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+//                 </svg>
+//                 <span><strong>Guardian Email:</strong> {student.guardianEmail || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>Created At:</strong> {student.createdAt ? new Date(student.createdAt).toLocaleString() : 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path stroke Capstone="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>Updated At:</strong> {student.updatedAt ? new Date(student.updatedAt).toLocaleString() : 'Not provided'}</span>
+//               </div>
+//             </div>
+//           </div>
+//         ) : (
+//           <div className="bg-white rounded-xl shadow-lg p-6 text-center text-gray-600">
+//             No profile data available. Please fill out and save the form above to create your profile.
+//           </div>
+//         )}
+//       </div>
 //     </div>
 //   );
 // };
@@ -961,16 +1044,606 @@
 
 // export default StudentProfile;
 
+
+
+
+// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+// import React, { useState, useContext, useEffect } from 'react';
+// import { AuthContext } from '../../../providers/AuthProvider';
+// import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+// import Swal from 'sweetalert2';
+// import { useForm } from 'react-hook-form'; // Import react-hook-form
+// import { FaImage } from 'react-icons/fa'; // Import FaImage for icon
+
+// const StudentProfile = () => {
+//   const { user } = useContext(AuthContext);
+//   const axiosSecure = useAxiosSecure();
+//   const queryClient = useQueryClient();
+
+//   const { register, handleSubmit, formState: { errors }, reset } = useForm(); // Initialize react-hook-form
+
+//   const [formData, setFormData] = useState({
+//     fullName: '',
+//     photoURL: user?.photoURL || '',
+//     email: user?.email || '',
+//     dateOfBirth: '',
+//     gender: '',
+//     contactNumber: '',
+//     institution: '',
+//     studentId: '',
+//     gradeYearOfStudy: '',
+//     permanentAddress: '',
+//     currentAddress: '',
+//     cityStateCountry: '',
+//     zipPostalCode: '',
+//     guardianName: '',
+//     guardianContactNumber: '',
+//     guardianEmail: '',
+//   });
+
+//   const [imageUploading, setImageUploading] = useState(false); // State for upload status
+
+//   // Fetch student profile
+//   const {
+//     data: student,
+//     isLoading: studentLoading,
+//     error: studentError,
+//   } = useQuery({
+//     queryKey: ['studentProfile', user?.email],
+//     queryFn: async () => {
+//       if (!user?.email) return null;
+//       try {
+//         const res = await axiosSecure.get(`/students/${user.email}`);
+//         return res.data;
+//       } catch (error) {
+//         if (error.response?.status === 404) {
+//           console.log('No student profile found; initializing with user data.');
+//           return null;
+//         }
+//         throw error;
+//       }
+//     },
+//     enabled: !!user?.email,
+//   });
+
+//   // Initialize formData when student data is fetched
+//   useEffect(() => {
+//     if (student) {
+//       const updatedFormData = {
+//         fullName: student.fullName || '',
+//         photoURL: student.photoURL || user?.photoURL || '',
+//         email: user?.email || '',
+//         dateOfBirth: student.dateOfBirth ? new Date(student.dateOfBirth).toISOString().split('T')[0] : '',
+//         gender: student.gender || '',
+//         contactNumber: student.contactNumber || '',
+//         institution: student.institution || '',
+//         studentId: student.studentId || '',
+//         gradeYearOfStudy: student.gradeYearOfStudy || '',
+//         permanentAddress: student.permanentAddress || '',
+//         currentAddress: student.currentAddress || '',
+//         cityStateCountry: student.cityStateCountry || '',
+//         zipPostalCode: student.zipPostalCode || '',
+//         guardianName: student.guardianName || '',
+//         guardianContactNumber: student.guardianContactNumber || '',
+//         guardianEmail: student.guardianEmail || '',
+//       };
+//       setFormData(updatedFormData);
+//       reset(updatedFormData); // Reset form with fetched data
+//     }
+//   }, [student, user, reset]);
+
+//   // Mutation for saving student profile
+//   const mutation = useMutation({
+//     mutationFn: async (data) => {
+//       let imageURL = formData.photoURL; // Use existing photoURL if no new image
+//       if (data.image && data.image[0]) {
+//         setImageUploading(true);
+//         try {
+//           const formDataImage = new FormData();
+//           formDataImage.append('image', data.image[0]);
+//           const imgRes = await fetch(image_hosting_api, {
+//             method: 'POST',
+//             body: formDataImage,
+//           });
+//           const imgData = await imgRes.json();
+//           if (imgData.success) {
+//             imageURL = imgData.data.display_url;
+//           } else {
+//             throw new Error('Image upload failed');
+//           }
+//         } catch (error) {
+//           Swal.fire({
+//             icon: 'error',
+//             title: 'Upload Error',
+//             text: 'Failed to upload image. Please try again.',
+//           });
+//           throw error;
+//         } finally {
+//           setImageUploading(false);
+//         }
+//       }
+
+//       const updatedFormData = { ...data, photoURL: imageURL, email: user?.email };
+//       const res = await axiosSecure.put(`/students/${user.email}`, updatedFormData);
+//       return res.data;
+//     },
+//     onSuccess: (data) => {
+//       queryClient.setQueryData(['studentProfile', user?.email], data);
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Success',
+//         text: 'Profile saved successfully!',
+//         timer: 1500,
+//         showConfirmButton: false,
+//       });
+//     },
+//     onError: (err) => {
+//       console.error('Error saving student profile:', err);
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Error',
+//         text: err.response?.data?.message || 'Failed to save profile.',
+//       });
+//     },
+//   });
+
+//   // Handle input changes
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     if (['contactNumber', 'guardianContactNumber'].includes(name)) {
+//       if (!/^[0-9+\-\s]{0,15}$/.test(value)) return;
+//     }
+//     setFormData((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   // Handle form submission
+//   const onSubmit = async (data) => {
+//     const requiredFields = [
+//       'fullName',
+//       'dateOfBirth',
+//       'gender',
+//       'contactNumber',
+//       'institution',
+//       'studentId',
+//       'gradeYearOfStudy',
+//       'permanentAddress',
+//       'currentAddress',
+//       'cityStateCountry',
+//       'zipPostalCode',
+//       'guardianName',
+//       'guardianContactNumber',
+//     ];
+
+//     const missingFields = requiredFields.filter((field) => !data[field]);
+//     if (missingFields.length > 0) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Missing Fields',
+//         text: `Please fill in: ${missingFields.join(', ')}`,
+//       });
+//       return;
+//     }
+
+//     const phoneRegex = /^[0-9+\-\s]{10,15}$/;
+//     if (!phoneRegex.test(data.contactNumber) || !phoneRegex.test(data.guardianContactNumber)) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Invalid Input',
+//         text: 'Contact numbers must be 10-15 digits (including +, -, or spaces).',
+//       });
+//       return;
+//     }
+
+//     const dob = new Date(data.dateOfBirth);
+//     if (isNaN(dob) || dob >= new Date()) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Invalid Date',
+//         text: 'Date of Birth must be a valid date in the past.',
+//       });
+//       return;
+//     }
+
+//     mutation.mutate(data);
+//   };
+
+//   // Handle loading and error states
+//   if (studentLoading) {
+//     return (
+//       <div className="flex items-center justify-center py-20">
+//         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+//       </div>
+//     );
+//   }
+
+//   if (!user?.email) {
+//     return (
+//       <div className="text-center py-10">
+//         <p className="text-red-500 text-lg font-semibold">Please log in to view your profile.</p>
+//         <button
+//           onClick={() => window.location.href = '/login'}
+//           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+//         >
+//           Go to Login
+//         </button>
+//       </div>
+//     );
+//   }
+
+//   if (studentError) {
+//     return (
+//       <div className="text-center py-10">
+//         <p className="text-red-500 text-lg font-semibold">
+//           Error: {studentError?.response?.data?.message || 'Failed to load profile data.'}
+//         </p>
+//         <button
+//           onClick={() => window.location.reload()}
+//           className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+//         >
+//           Retry
+//         </button>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="max-w-4xl mx-auto p-6">
+//       <h2 className="text-3xl font-bold mb-6 text-gray-800">Student Profile</h2>
+
+//       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg">
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Full Name</label>
+//           <input
+//             {...register('fullName', { required: 'Full Name is required' })}
+//             type="text"
+//             name="fullName"
+//             value={formData.fullName}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.fullName && <span className="text-red-500 text-sm">{errors.fullName.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Profile Photo</label>
+//           <div className="flex items-center gap-2">
+//             <FaImage className="text-gray-400" />
+//             <input
+//               {...register('image', { required: 'Image is required' })}
+//               type="file"
+//               accept="image/*"
+//               className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[var(--color-text-dark)] file:text-white hover:file:bg-opacity-90"
+//             />
+//           </div>
+//           {errors.image && <span className="text-red-500 text-sm">{errors.image.message}</span>}
+//           {imageUploading && (
+//             <p className="text-sm text-blue-600 mt-1">Uploading image...</p>
+//           )}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Email</label>
+//           <input
+//             type="email"
+//             name="email"
+//             value={formData.email}
+//             disabled
+//             className="w-full border p-2 rounded-lg bg-gray-100 cursor-not-allowed"
+//           />
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Date of Birth</label>
+//           <input
+//             {...register('dateOfBirth', { required: 'Date of Birth is required' })}
+//             type="date"
+//             name="dateOfBirth"
+//             value={formData.dateOfBirth}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.dateOfBirth && <span className="text-red-500 text-sm">{errors.dateOfBirth.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Gender</label>
+//           <input
+//             {...register('gender', { required: 'Gender is required' })}
+//             type="text"
+//             name="gender"
+//             value={formData.gender}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.gender && <span className="text-red-500 text-sm">{errors.gender.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Contact Number</label>
+//           <input
+//             {...register('contactNumber', { required: 'Contact Number is required' })}
+//             type="text"
+//             name="contactNumber"
+//             value={formData.contactNumber}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.contactNumber && <span className="text-red-500 text-sm">{errors.contactNumber.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Institution</label>
+//           <input
+//             {...register('institution', { required: 'Institution is required' })}
+//             type="text"
+//             name="institution"
+//             value={formData.institution}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.institution && <span className="text-red-500 text-sm">{errors.institution.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Student ID</label>
+//           <input
+//             {...register('studentId', { required: 'Student ID is required' })}
+//             type="text"
+//             name="studentId"
+//             value={formData.studentId}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.studentId && <span className="text-red-500 text-sm">{errors.studentId.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Grade/Year of Study</label>
+//           <input
+//             {...register('gradeYearOfStudy', { required: 'Grade/Year of Study is required' })}
+//             type="text"
+//             name="gradeYearOfStudy"
+//             value={formData.gradeYearOfStudy}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.gradeYearOfStudy && <span className="text-red-500 text-sm">{errors.gradeYearOfStudy.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Permanent Address</label>
+//           <input
+//             {...register('permanentAddress', { required: 'Permanent Address is required' })}
+//             type="text"
+//             name="permanentAddress"
+//             value={formData.permanentAddress}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.permanentAddress && <span className="text-red-500 text-sm">{errors.permanentAddress.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Current Address</label>
+//           <input
+//             {...register('currentAddress', { required: 'Current Address is required' })}
+//             type="text"
+//             name="currentAddress"
+//             value={formData.currentAddress}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.currentAddress && <span className="text-red-500 text-sm">{errors.currentAddress.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">City/State/Country</label>
+//           <input
+//             {...register('cityStateCountry', { required: 'City/State/Country is required' })}
+//             type="text"
+//             name="cityStateCountry"
+//             value={formData.cityStateCountry}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.cityStateCountry && <span className="text-red-500 text-sm">{errors.cityStateCountry.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">ZIP/Postal Code</label>
+//           <input
+//             {...register('zipPostalCode', { required: 'ZIP/Postal Code is required' })}
+//             type="text"
+//             name="zipPostalCode"
+//             value={formData.zipPostalCode}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.zipPostalCode && <span className="text-red-500 text-sm">{errors.zipPostalCode.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Name</label>
+//           <input
+//             {...register('guardianName', { required: 'Guardian Name is required' })}
+//             type="text"
+//             name="guardianName"
+//             value={formData.guardianName}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.guardianName && <span className="text-red-500 text-sm">{errors.guardianName.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Contact Number</label>
+//           <input
+//             {...register('guardianContactNumber', { required: 'Guardian Contact Number is required' })}
+//             type="text"
+//             name="guardianContactNumber"
+//             value={formData.guardianContactNumber}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.guardianContactNumber && <span className="text-red-500 text-sm">{errors.guardianContactNumber.message}</span>}
+//         </div>
+//         <div>
+//           <label className="block font-semibold text-gray-700 mb-1">Guardian Email</label>
+//           <input
+//             {...register('guardianEmail')}
+//             type="email"
+//             name="guardianEmail"
+//             value={formData.guardianEmail}
+//             onChange={handleChange}
+//             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+//           />
+//           {errors.guardianEmail && <span className="text-red-500 text-sm">{errors.guardianEmail.message}</span>}
+//         </div>
+
+//         <div className="col-span-2 flex justify-end">
+//           <button
+//             type="submit"
+//             className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300"
+//             disabled={mutation.isLoading || imageUploading}
+//           >
+//             {mutation.isLoading || imageUploading ? 'Saving...' : 'Save Profile'}
+//           </button>
+//         </div>
+//       </form>
+
+//       <div className="mt-10">
+//         <h3 className="text-2xl font-semibold mb-6 text-gray-800">Current Profile</h3>
+//         {student ? (
+//           <div className="bg-white rounded-xl shadow-lg p-6">
+//             <div className="flex items-center mb-6">
+//               {student.photoURL ? (
+//                 <img
+//                   src={student.photoURL}
+//                   alt="Student"
+//                   className="w-24 h-24 rounded-full mr-4 object-cover"
+//                   onError={(e) => (e.target.src = 'https://via.placeholder.com/150')}
+//                 />
+//               ) : (
+//                 <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+//                   <span className="text-gray-500">No Image</span>
+//                 </div>
+//               )}
+//               <div>
+//                 <h4 className="text-xl font-bold text-gray-800">{student.fullName || 'Not provided'}</h4>
+//                 <p className="text-gray-600">{student.email || 'Not provided'}</p>
+//               </div>
+//             </div>
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>DOB:</strong> {student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+//                 </svg>
+//                 <span><strong>Gender:</strong> {student.gender || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+//                 </svg>
+//                 <span><strong>Contact:</strong> {student.contactNumber || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Institution:</strong> {student.institution || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+//                 </svg>
+//                 <span><strong>Student ID:</strong> {student.studentId || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+//                 </svg>
+//                 <span><strong>Grade/Year:</strong> {student.gradeYearOfStudy || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Permanent Address:</strong> {student.permanentAddress || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+//                 </svg>
+//                 <span><strong>Current Address:</strong> {student.currentAddress || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+//                 </svg>
+//                 <span><strong>City/State/Country:</strong> {student.cityStateCountry || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+//                 </svg>
+//                 <span><strong>Zip Code:</strong> {student.zipPostalCode || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+//                 </svg>
+//                 <span><strong>Guardian Name:</strong> {student.guardianName || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+//                 </svg>
+//                 <span><strong>Guardian Phone:</strong> {student.guardianContactNumber || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+//                 </svg>
+//                 <span><strong>Guardian Email:</strong> {student.guardianEmail || 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>Created At:</strong> {student.createdAt ? new Date(student.createdAt).toLocaleString() : 'Not provided'}</span>
+//               </div>
+//               <div className="flex items-center">
+//                 <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                 </svg>
+//                 <span><strong>Updated At:</strong> {student.updatedAt ? new Date(student.updatedAt).toLocaleString() : 'Not provided'}</span>
+//               </div>
+//             </div>
+//           </div>
+//         ) : (
+//           <div className="bg-white rounded-xl shadow-lg p-6 text-center text-gray-600">
+//             No profile data available. Please fill out and save the form above to create your profile.
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default StudentProfile;
+
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form'; // Import react-hook-form
+import { FaImage } from 'react-icons/fa'; // Import FaImage for icon
 
 const StudentProfile = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+
+  const { register, handleSubmit, formState: { errors }, reset } = useForm(); // Initialize react-hook-form
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -990,6 +1663,8 @@ const StudentProfile = () => {
     guardianContactNumber: '',
     guardianEmail: '',
   });
+
+  const [imageUploading, setImageUploading] = useState(false); // State for upload status
 
   // Fetch student profile
   const {
@@ -1017,7 +1692,7 @@ const StudentProfile = () => {
   // Initialize formData when student data is fetched
   useEffect(() => {
     if (student) {
-      setFormData({
+      const updatedFormData = {
         fullName: student.fullName || '',
         photoURL: student.photoURL || user?.photoURL || '',
         email: user?.email || '',
@@ -1034,14 +1709,45 @@ const StudentProfile = () => {
         guardianName: student.guardianName || '',
         guardianContactNumber: student.guardianContactNumber || '',
         guardianEmail: student.guardianEmail || '',
-      });
+      };
+      setFormData(updatedFormData);
+      reset(updatedFormData); // Reset form with fetched data
     }
-  }, [student, user]);
+  }, [student, user, reset]);
 
   // Mutation for saving student profile
   const mutation = useMutation({
-    mutationFn: async (formData) => {
-      const res = await axiosSecure.put(`/students/${user.email}`, formData);
+    mutationFn: async (data) => {
+      let imageURL = formData.photoURL; // Use existing photoURL if no new image
+      if (data.image && data.image[0]) {
+        setImageUploading(true);
+        try {
+          const formDataImage = new FormData();
+          formDataImage.append('image', data.image[0]);
+          const imgRes = await fetch(image_hosting_api, {
+            method: 'POST',
+            body: formDataImage,
+          });
+          const imgData = await imgRes.json();
+          if (imgData.success) {
+            imageURL = imgData.data.display_url;
+          } else {
+            throw new Error('Image upload failed');
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Error',
+            text: 'Failed to upload image. Please try again.',
+          });
+          throw error;
+        } finally {
+          setImageUploading(false);
+        }
+      }
+
+      const updatedFormData = { ...data, photoURL: imageURL, email: user?.email };
+      const res = await axiosSecure.put(`/students/${user.email}`, updatedFormData);
       return res.data;
     },
     onSuccess: (data) => {
@@ -1074,9 +1780,7 @@ const StudentProfile = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     const requiredFields = [
       'fullName',
       'dateOfBirth',
@@ -1093,7 +1797,7 @@ const StudentProfile = () => {
       'guardianContactNumber',
     ];
 
-    const missingFields = requiredFields.filter((field) => !formData[field]);
+    const missingFields = requiredFields.filter((field) => !data[field]);
     if (missingFields.length > 0) {
       Swal.fire({
         icon: 'error',
@@ -1104,7 +1808,7 @@ const StudentProfile = () => {
     }
 
     const phoneRegex = /^[0-9+\-\s]{10,15}$/;
-    if (!phoneRegex.test(formData.contactNumber) || !phoneRegex.test(formData.guardianContactNumber)) {
+    if (!phoneRegex.test(data.contactNumber) || !phoneRegex.test(data.guardianContactNumber)) {
       Swal.fire({
         icon: 'error',
         title: 'Invalid Input',
@@ -1113,7 +1817,7 @@ const StudentProfile = () => {
       return;
     }
 
-    const dob = new Date(formData.dateOfBirth);
+    const dob = new Date(data.dateOfBirth);
     if (isNaN(dob) || dob >= new Date()) {
       Swal.fire({
         icon: 'error',
@@ -1123,7 +1827,7 @@ const StudentProfile = () => {
       return;
     }
 
-    mutation.mutate(formData);
+    mutation.mutate(data);
   };
 
   // Handle loading and error states
@@ -1166,316 +1870,421 @@ const StudentProfile = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Student Profile</h2>
+    <div className="min-h-screen bg-[#FFFFFF]">
+      {/* Profile Header */}
+      <div className="bg-[#70C5D7] rounded-b-2xl">
+        <div className="max-w-[1200px] mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <div className="relative">
+                {student?.photoURL ? (
+                  <div className="relative">
+                    <img
+                      src={student.photoURL}
+                      alt={student.fullName}
+                      className="w-20 h-20 rounded-full object-cover border-2 border-white"
+                      onError={(e) => (e.target.src = 'https://via.placeholder.com/150')}
+                    />
+                    <div className="absolute -bottom-1 -right-1 bg-[#FCBB45] rounded-full w-6 h-6 flex items-center justify-center border-2 border-white">
+                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center">
+                    <span className="text-[#70C5D7] text-2xl font-bold">
+                      {student?.fullName?.charAt(0) || '?'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white mb-1">{student?.fullName || 'Student Name'}</h1>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 text-white text-sm">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span>{student?.email}</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="bg-white text-[#70C5D7] px-3 py-1 rounded-full text-sm">
+                      {student?.gradeYearOfStudy} Year
+                    </span>
+                    <span className="bg-white text-[#70C5D7] px-3 py-1 rounded-full text-sm">
+                      {student?.institution}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => document.getElementById('profile-form').scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#DA3A60] text-white px-4 py-2 rounded-md hover:bg-[#c43255] transition-colors flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              Edit Profile
+            </button>
+          </div>
+        </div>
+      </div>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg">
+      {/* Profile Content */}
+      <div className="max-w-[1200px] mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Personal Information */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[#FCBB45]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </span>
+              <h2 className="text-lg font-semibold text-[#005482]">Personal Information</h2>
+            </div>
+            <div className="space-y-4">
         <div>
-          <label className="block font-semibold text-gray-700 mb-1">Full Name</label>
+                <label className="text-sm text-gray-500">Date of Birth</label>
+                <p className="text-[#005482]">{student?.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Gender</label>
+                <p className="text-[#005482]">{student?.gender || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Contact Number</label>
+                <p className="text-[#005482]">{student?.contactNumber || 'Not provided'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Academic Information */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[#FCBB45]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </span>
+              <h2 className="text-lg font-semibold text-[#005482]">Academic Information</h2>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm text-gray-500">Institution</label>
+                <p className="text-[#005482]">{student?.institution || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Student ID</label>
+                <p className="text-[#005482]">{student?.studentId || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Grade/Year</label>
+                <p className="text-[#005482]">{student?.gradeYearOfStudy || 'Not provided'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Guardian Information */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[#FCBB45]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </span>
+              <h2 className="text-lg font-semibold text-[#005482]">Guardian Information</h2>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm text-gray-500">Guardian Name</label>
+                <p className="text-[#005482]">{student?.guardianName || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Guardian Contact</label>
+                <p className="text-[#005482]">{student?.guardianContactNumber || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Guardian Email</label>
+                <p className="text-[#005482]">{student?.guardianEmail || 'Not provided'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Address Information */}
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 md:col-span-3">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[#FCBB45]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </span>
+              <h2 className="text-lg font-semibold text-[#005482]">Address Information</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm text-gray-500">Current Address</label>
+                <p className="text-[#005482]">{student?.currentAddress || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">Permanent Address</label>
+                <p className="text-[#005482]">{student?.permanentAddress || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">City/State/Country</label>
+                <p className="text-[#005482]">{student?.cityStateCountry || 'Not provided'}</p>
+              </div>
+              <div>
+                <label className="text-sm text-gray-500">ZIP/Postal Code</label>
+                <p className="text-[#005482]">{student?.zipPostalCode || 'Not provided'}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Profile Form */}
+        <div id="profile-form" className="mt-12">
+          <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
+            <h3 className="text-2xl font-bold text-[#005482] mb-6">
+              {student ? 'Update Profile' : 'Create Profile'}
+            </h3>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[#005482] mb-1">Full Name</label>
           <input
+                  {...register('fullName', { required: 'Full Name is required' })}
             type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#70C5D7] focus:border-[#70C5D7]"
+                  placeholder="Enter your full name"
+                />
+                {errors.fullName && <span className="text-[#DA3A60] text-sm mt-1">{errors.fullName.message}</span>}
         </div>
         <div>
-          <label className="block font-semibold text-gray-700 mb-1">Photo URL</label>
+                <label className="block text-sm font-medium text-[#005482] mb-1">Profile Photo</label>
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1">
           <input
-            type="text"
-            name="photoURL"
-            value={formData.photoURL}
-            onChange={handleChange}
-            className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+                      {...register('image')}
+                      type="file"
+                      accept="image/*"
+                      className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                               file:rounded-full file:border-0 file:text-sm file:font-semibold 
+                               file:bg-[#70C5D7] file:text-white hover:file:bg-[#5eb4c6]
+                               cursor-pointer border border-gray-300 rounded-md"
+                    />
+                    {imageUploading && (
+                      <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
+                        <svg className="animate-spin h-5 w-5 text-[#70C5D7]" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {errors.image && <span className="text-[#DA3A60] text-sm mt-1">{errors.image.message}</span>}
         </div>
         <div>
-          <label className="block font-semibold text-gray-700 mb-1">Email</label>
+                <label className="block text-sm font-medium text-[#005482] mb-1">Email</label>
           <input
             type="email"
-            name="email"
-            value={formData.email}
+                  value={user?.email || ''}
             disabled
-            className="w-full border p-2 rounded-lg bg-gray-100 cursor-not-allowed"
+                  className="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 cursor-not-allowed"
           />
         </div>
         <div>
-          <label className="block font-semibold text-gray-700 mb-1">Date of Birth</label>
+                <label className="block text-sm font-medium text-[#005482] mb-1">Date of Birth</label>
           <input
+                  {...register('dateOfBirth', { required: 'Date of Birth is required' })}
             type="date"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#70C5D7] focus:border-[#70C5D7]"
+                />
+                {errors.dateOfBirth && <span className="text-[#DA3A60] text-sm mt-1">{errors.dateOfBirth.message}</span>}
         </div>
         <div>
-          <label className="block font-semibold text-gray-700 mb-1">Gender</label>
-          <input
-            type="text"
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-            className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+                <label className="block text-sm font-medium text-[#005482] mb-1">Gender</label>
+                <select
+                  {...register('gender', { required: 'Gender is required' })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#70C5D7] focus:border-[#70C5D7]"
+                >
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                {errors.gender && <span className="text-[#DA3A60] text-sm mt-1">{errors.gender.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Contact Number</label>
           <input
+                  {...register('contactNumber', { required: 'Contact Number is required' })}
             type="text"
             name="contactNumber"
             value={formData.contactNumber}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.contactNumber && <span className="text-red-500 text-sm">{errors.contactNumber.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Institution</label>
           <input
+                  {...register('institution', { required: 'Institution is required' })}
             type="text"
             name="institution"
             value={formData.institution}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.institution && <span className="text-red-500 text-sm">{errors.institution.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Student ID</label>
           <input
+                  {...register('studentId', { required: 'Student ID is required' })}
             type="text"
             name="studentId"
             value={formData.studentId}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.studentId && <span className="text-red-500 text-sm">{errors.studentId.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Grade/Year of Study</label>
           <input
+                  {...register('gradeYearOfStudy', { required: 'Grade/Year of Study is required' })}
             type="text"
             name="gradeYearOfStudy"
             value={formData.gradeYearOfStudy}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.gradeYearOfStudy && <span className="text-red-500 text-sm">{errors.gradeYearOfStudy.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Permanent Address</label>
           <input
+                  {...register('permanentAddress', { required: 'Permanent Address is required' })}
             type="text"
             name="permanentAddress"
             value={formData.permanentAddress}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.permanentAddress && <span className="text-red-500 text-sm">{errors.permanentAddress.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Current Address</label>
           <input
+                  {...register('currentAddress', { required: 'Current Address is required' })}
             type="text"
             name="currentAddress"
             value={formData.currentAddress}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.currentAddress && <span className="text-red-500 text-sm">{errors.currentAddress.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">City/State/Country</label>
           <input
+                  {...register('cityStateCountry', { required: 'City/State/Country is required' })}
             type="text"
             name="cityStateCountry"
             value={formData.cityStateCountry}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.cityStateCountry && <span className="text-red-500 text-sm">{errors.cityStateCountry.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">ZIP/Postal Code</label>
           <input
+                  {...register('zipPostalCode', { required: 'ZIP/Postal Code is required' })}
             type="text"
             name="zipPostalCode"
             value={formData.zipPostalCode}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.zipPostalCode && <span className="text-red-500 text-sm">{errors.zipPostalCode.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Guardian Name</label>
           <input
+                  {...register('guardianName', { required: 'Guardian Name is required' })}
             type="text"
             name="guardianName"
             value={formData.guardianName}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.guardianName && <span className="text-red-500 text-sm">{errors.guardianName.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Guardian Contact Number</label>
           <input
+                  {...register('guardianContactNumber', { required: 'Guardian Contact Number is required' })}
             type="text"
             name="guardianContactNumber"
             value={formData.guardianContactNumber}
             onChange={handleChange}
-            required
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.guardianContactNumber && <span className="text-red-500 text-sm">{errors.guardianContactNumber.message}</span>}
         </div>
         <div>
           <label className="block font-semibold text-gray-700 mb-1">Guardian Email</label>
           <input
+                  {...register('guardianEmail')}
             type="email"
             name="guardianEmail"
             value={formData.guardianEmail}
             onChange={handleChange}
             className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
+                {errors.guardianEmail && <span className="text-red-500 text-sm">{errors.guardianEmail.message}</span>}
         </div>
 
-        <div className="col-span-2 flex justify-end">
+              <div className="col-span-2 flex justify-end gap-4">
+                <button
+                  type="reset"
+                  onClick={() => reset(student || {})}
+                  className="px-6 py-2 border-2 border-[#005482] text-[#005482] rounded-md hover:bg-[#005482] hover:text-white transition-colors"
+                >
+                  Reset
+                </button>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300"
-            disabled={mutation.isLoading}
-          >
-            {mutation.isLoading ? 'Saving...' : 'Save Profile'}
+                  className="bg-[#DA3A60] text-white px-8 py-2 rounded-md hover:bg-[#c43255] transition-colors disabled:bg-opacity-50 flex items-center gap-2"
+                  disabled={mutation.isLoading || imageUploading}
+                >
+                  {mutation.isLoading || imageUploading ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Save Profile</span>
+                    </>
+                  )}
           </button>
         </div>
       </form>
-
-      <div className="mt-10">
-        <h3 className="text-2xl font-semibold mb-6 text-gray-800">Current Profile</h3>
-        {student ? (
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <div className="flex items-center mb-6">
-              {student.photoURL ? (
-                <img
-                  src={student.photoURL}
-                  alt="Student"
-                  className="w-24 h-24 rounded-full mr-4 object-cover"
-                  onError={(e) => (e.target.src = 'https://via.placeholder.com/150')}
-                />
-              ) : (
-                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mr-4">
-                  <span className="text-gray-500">No Image</span>
                 </div>
-              )}
-              <div>
-                <h4 className="text-xl font-bold text-gray-800">{student.fullName || 'Not provided'}</h4>
-                <p className="text-gray-600">{student.email || 'Not provided'}</p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span><strong>DOB:</strong> {student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString() : 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-                </svg>
-                <span><strong>Gender:</strong> {student.gender || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span><strong>Contact:</strong> {student.contactNumber || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span><strong>Institution:</strong> {student.institution || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                </svg>
-                <span><strong>Student ID:</strong> {student.studentId || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-                <span><strong>Grade/Year:</strong> {student.gradeYearOfStudy || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span><strong>Permanent Address:</strong> {student.permanentAddress || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span><strong>Current Address:</strong> {student.currentAddress || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span><strong>City/State/Country:</strong> {student.cityStateCountry || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span><strong>Zip Code:</strong> {student.zipPostalCode || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <span><strong>Guardian Name:</strong> {student.guardianName || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span><strong>Guardian Phone:</strong> {student.guardianContactNumber || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                </svg>
-                <span><strong>Guardian Email:</strong> {student.guardianEmail || 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span><strong>Created At:</strong> {student.createdAt ? new Date(student.createdAt).toLocaleString() : 'Not provided'}</span>
-              </div>
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke Capstone="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span><strong>Updated At:</strong> {student.updatedAt ? new Date(student.updatedAt).toLocaleString() : 'Not provided'}</span>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-xl shadow-lg p-6 text-center text-gray-600">
-            No profile data available. Please fill out and save the form above to create your profile.
-          </div>
-        )}
       </div>
     </div>
   );

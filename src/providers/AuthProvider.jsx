@@ -35,11 +35,20 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
 };
 
+    // const updateUserProfile = (name, photo) => {
+    //     return updateProfile(auth.currentUser, {
+    //         displayName: name,  photoURL: photoURL || "",
+    //     });
+    // };
+
+
     const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo,
-        });
-    };
+  return updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: photo || "",
+  });
+};
+
 
     // useEffect(() => {
     //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

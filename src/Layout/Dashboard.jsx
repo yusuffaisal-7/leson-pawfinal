@@ -546,17 +546,35 @@ const Dashboard = () => {
   const location = useLocation();
 
   // 👇 Auto redirect logic
+  // useEffect(() => {
+  //   if (location.pathname === "/dashboard") {
+  //     if (isAdmin) {
+  //       navigate("/dashboard/manage-users");
+  //     } else if (isTeacher) {
+  //       navigate("/dashboard/teacherProfile");
+  //     } else {
+  //       navigate("/dashboard/studentProfile");
+  //     }
+  //   }
+  // }, [isAdmin, isTeacher, navigate, location.pathname]);
+
   useEffect(() => {
-    if (location.pathname === "/dashboard") {
-      if (isAdmin) {
-        navigate("/dashboard/manage-users");
-      } else if (isTeacher) {
-        navigate("/dashboard/teacherProfile");
-      } else {
-        navigate("/dashboard/studentProfile");
-      }
+  // Wait until role is known (not undefined)
+  if (
+    location.pathname === "/dashboard" &&
+    isAdmin !== undefined &&
+    isTeacher !== undefined
+  ) {
+    if (isAdmin) {
+      navigate("/dashboard/manage-users");
+    } else if (isTeacher) {
+      navigate("/dashboard/teacherProfile");
+    } else {
+      navigate("/dashboard/studentProfile");
     }
-  }, [isAdmin, isTeacher, navigate, location.pathname]);
+  }
+}, [isAdmin, isTeacher, location.pathname, navigate]);
+
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);

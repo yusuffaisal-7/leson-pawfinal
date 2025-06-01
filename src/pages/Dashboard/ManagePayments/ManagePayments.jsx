@@ -1,7 +1,8 @@
+
+
 // import React from 'react';
 // import { useQuery } from '@tanstack/react-query';
 // import useAxiosSecure from '../../../hooks/useAxiosSecure';
-
 
 // const ManagePayments = () => {
 //   const axiosSecure = useAxiosSecure();
@@ -9,7 +10,7 @@
 //   const { data: payments = [], isLoading } = useQuery({
 //     queryKey: ['payments'],
 //     queryFn: async () => {
-//       const res = await axiosSecure.get('/payments');
+//       const res = await axiosSecure.get('/payments'); 
 //       return res.data;
 //     },
 //   });
@@ -24,9 +25,8 @@
 //           <thead>
 //             <tr>
 //               <th>Student Email</th>
-//               <th>Tutor Email</th>
+//               <th>Transaction ID</th>
 //               <th>Amount</th>
-//               <th>Commission</th>
 //               <th>Status</th>
 //               <th>Date</th>
 //             </tr>
@@ -34,12 +34,11 @@
 //           <tbody>
 //             {payments.map((payment) => (
 //               <tr key={payment._id}>
-//                 <td>{payment.studentEmail}</td>
-//                 <td>{payment.tutorEmail}</td>
-//                 <td>{payment.amount}</td>
-//                 <td>{payment.commission}</td>
+//                 <td>{payment.email}</td>
+//                 <td>{payment.transactionId}</td>
+//                 <td>${payment.price}</td>
 //                 <td>{payment.status}</td>
-//                 <td>{new Date(payment.createdAt).toLocaleString()}</td>
+//                 <td>{new Date(payment.date).toLocaleString()}</td>
 //               </tr>
 //             ))}
 //           </tbody>
@@ -51,6 +50,7 @@
 
 // export default ManagePayments;
 
+
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -61,7 +61,7 @@ const ManagePayments = () => {
   const { data: payments = [], isLoading } = useQuery({
     queryKey: ['payments'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/payments'); // Ensure this endpoint exists in your backend
+      const res = await axiosSecure.get('/payments'); 
       return res.data;
     },
   });
@@ -78,7 +78,7 @@ const ManagePayments = () => {
               <th>Student Email</th>
               <th>Transaction ID</th>
               <th>Amount</th>
-              <th>Status</th>
+              <th>Tutor Email</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -87,9 +87,9 @@ const ManagePayments = () => {
               <tr key={payment._id}>
                 <td>{payment.email}</td>
                 <td>{payment.transactionId}</td>
-                <td>${payment.price}</td>
-                <td>{payment.status}</td>
-                <td>{new Date(payment.date).toLocaleString()}</td>
+                <td>${payment.price.toFixed(2)}</td>
+                <td>{payment.tutorEmails && payment.tutorEmails.length > 0 ? payment.tutorEmails.join(', ') : 'N/A'}</td>
+                <td>{new Date(payment.date).toLocaleString('en-US', { timeZone: 'Asia/Dhaka' })}</td>
               </tr>
             ))}
           </tbody>

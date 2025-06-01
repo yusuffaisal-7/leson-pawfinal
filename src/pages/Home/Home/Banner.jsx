@@ -23,63 +23,96 @@
 // export default Banner;
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { useLanguage } from '../../../providers/LanguageProvider';
 import img2 from "../../../assets/img-02.png";
 
 const Banner = () => {
-  const [emphasizedText, setEmphasizedText] = useState('Equitable society');
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { user } = useContext(AuthContext);
+  const { translate } = useLanguage();
+  const navigate = useNavigate();
   const texts = ['Equitable society', 'Self confidence'];
+  const typingSpeed = 150; // Speed for typing
+  const deletingSpeed = 100; // Speed for deleting
+  const delayBetweenWords = 1000; // Delay after word is typed
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setEmphasizedText((prev) => {
-        const currentIndex = texts.indexOf(prev);
-        return texts[(currentIndex + 1) % texts.length];
-      });
-    }, 3000); // Change text every 3 seconds
-    return () => clearInterval(interval);
-  }, [texts]);
+    let timeout;
+
+    const animateText = () => {
+      const currentText = texts[currentIndex];
+      
+      if (!isDeleting) {
+        // Typing
+        if (displayText.length < currentText.length) {
+          setDisplayText(currentText.slice(0, displayText.length + 1));
+          timeout = setTimeout(animateText, typingSpeed);
+        } else {
+          // Finished typing, wait before deleting
+          timeout = setTimeout(() => setIsDeleting(true), delayBetweenWords);
+        }
+      } else {
+        // Deleting
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+          timeout = setTimeout(animateText, deletingSpeed);
+        } else {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % texts.length);
+        }
+      }
+    };
+
+    timeout = setTimeout(animateText, 100);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentIndex]);
+
+  const handleJoinClick = () => {
+    if (!user) {
+      navigate('/login');
+    }
+  };
 
   return (
-    <div className="w-full bg-white py-12 px-4 text-center relative">
-      <div className="max-w-6xl mx-auto">
-        {/* Text and Image Side by Side */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Text Section */}
-          <div className="md:w-1/2 text-center md:text-left">
-            <h1 className="text-5xl font-bold leading-tight">
-              A good <span className="text-blue-500">#education</span> is always a base of
+    <div className="w-full bg-white py-16 min-h-[calc(100vh-60px)]">
+      <div className="w-full px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="w-full md:w-1/2 text-center md:text-left space-y-8">
+            <h1 className="text-6xl md:text-7xl font-bold leading-tight">
+              {translate('transformingEducation')} <span className="text-blue-500">{translate('inHaiti')}</span>
             </h1>
-            <div className="mt-4">
-              <span className="inline-block bg-purple-700 text-white px-6 py-3 text-4xl font-semibold rounded-sm">
-                {emphasizedText}
+            <div>
+              <span className="inline-block bg-[#DA3A60] text-white px-10 py-5 text-5xl md:text-6xl font-semibold rounded-2xl">
+                {displayText}
+                <span className="typing-cursor"></span>
               </span>
             </div>
-            <p className="mt-6 text-lg text-gray-700 max-w-md mx-auto md:mx-0">
-              Consectur adipiscing elit sedo eiusmod tempor incididun ut labore dolore magna aliqua ad minim veniamque.
+            <p className="text-xl text-gray-700 max-w-2xl">
+              {translate('buildingBridges')}
             </p>
-           <div className='pt-5 '>
-             <button className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-full hover:from-orange-600 hover:to-red-600">
-            Start as student 
-          </button>
-          <button className="bg-white text-gray-700 font-semibold py-3 px-6 rounded-full border border-gray-300 hover:bg-gray-100">
-            Join as Instructor It's Free!
-          </button>
-           </div>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+              <button 
+                onClick={handleJoinClick}
+                className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xl font-semibold py-5 px-10 rounded-full hover:from-orange-600 hover:to-red-600 transition-all"
+              >
+                {translate('getStarted')}
+              </button>
+            </div>
           </div>
-          {/* Image Section */}
-          <div className="md:w-1/2 flex justify-center">
-            <img src={img2} alt="Banner Illustration" className="w-full max-w-md h-auto" />
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <img src={img2} alt="Banner Illustration" className="w-full h-auto" />
           </div>
         </div>
-
         
-        {/* Parent Join Text */}
-        <p className="mt-6 text-gray-500 text-sm flex items-center justify-center gap-2">
-          <span className="text-xl">🛡️</span> You can also join as parent to explore join today
+        <p className="mt-12 text-gray-500 text-lg flex items-center justify-center gap-3">
+          <span className="text-3xl">🛡️</span> {translate('connectingStudents')}
         </p>
-
-        
       </div>
     </div>
   );

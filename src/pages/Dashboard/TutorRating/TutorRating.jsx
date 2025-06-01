@@ -71,7 +71,7 @@ const TutorRating = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const res = await axiosSecure.get('/tutors'); // Ensure this route exists
+        const res = await axiosSecure.get('/tutors'); 
         setTutors(res.data);
       } catch (error) {
         console.error('Failed to fetch tutors', error);
