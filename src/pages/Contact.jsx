@@ -360,7 +360,7 @@ const Contact = () => {
                         </svg>
                         <p className="text-gray-600 mb-2">Map loading failed</p>
                         <a 
-                          href="https://www.google.com/maps/place/Haiti/@19.1399952,-72.3570972,8z"
+                          href="https://www.google.com/maps/place/LessonPaw/@18.5219439,-72.2924134,17z/data=!4m6!3m5!1s0x8eb9e7cd4a1c7d15:0x7b6ea9c8afeb3bd2!8m2!3d18.5219439!4d-72.2924134!16s%2Fg%2F11h_7x8l5j"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-[#005482] hover:text-[#70C5D7] transition-colors"
@@ -371,23 +371,23 @@ const Contact = () => {
                     </div>
                   ) : (
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d967068.9076569386!2d-73.18063697866716!3d18.791091386096897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eb6c6f37fcbbb11%3A0xb51438b24c54f6d3!2sHaiti!5e0!3m2!1sen!2sus!4v1709926166599!5m2!1sen!2sus"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.2647924472837!2d-72.29241341486974!3d18.521943987401784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzE5LjAiTiA3MsKwMTcnMzIuNyJX!5e0!3m2!1sen!2sus!4v1709926166599!5m2!1sen!2sus&q=LessonPaw&markers=color:red%7Clabel:L%7C18.5219439,-72.2924134&query=LessonPaw"
                       className="w-full h-[400px] rounded-xl"
                       style={{ border: 0 }}
                       allowFullScreen=""
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       onError={handleMapError}
-                      title="Haiti Map"
+                      title="LessonPaw Office Location in Delmas 95, Petion-Ville"
                     />
                   )}
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-sm text-gray-600">
-                    45 Boulevard Jean-Jacques Dessalines, Turgeau, Port-au-Prince
+                    LessonPaw - 4, Allées des Acajous, Delmas 95, Petion-Ville 6121, Haiti
                   </p>
                   <a
-                    href="https://www.google.com/maps/dir//Port-au-Prince,+Haiti/"
+                    href="https://www.google.com/maps/dir//LessonPaw/4,+Allées+des+Acajous,+Delmas+95,+Pétion-Ville,+Haiti/@18.5219439,-72.2924134,17z/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-base text-[#005482] hover:text-[#70C5D7] transition-colors"
@@ -444,8 +444,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Email</p>
-                      <a href="mailto:support@lessonpaw.com" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
-                        support@lessonpaw.com
+                      <a href="mailto:info@jobpaw.com" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
+                        info@jobpaw.com
                       </a>
                     </div>
                   </div>
@@ -457,8 +457,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Phone</p>
-                      <a href="tel:(123) 456-7890" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
-                        (123) 456-7890
+                      <a href="tel:+15093701923" className="text-base text-[#005482] hover:text-[#70C5D7] transition-colors font-medium">
+                        +1 (509) 3701 9232
                       </a>
                     </div>
                   </div>
@@ -472,9 +472,9 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-gray-600 mb-1">Address</p>
                       <p className="text-base text-[#005482] font-medium">
-                        45 Boulevard Jean-Jacques Dessalines<br />
-                        Turgeau<br />
-                        Port-au-Prince, Haiti
+                        4, Allées des Acajous<br />
+                        Delmas 95, Petion-Ville<br />
+                        6121, Haiti
                       </p>
                     </div>
                   </div>
