@@ -1,89 +1,14 @@
-// import React from 'react';
-
-// const AboutUs = () => {
-//   return (
-//     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//       {/* Hero Section */}
-//       <section className="text-center py-12 border-b border-gray-200">
-//         <h1 className="text-4xl font-bold text-gray-900 mb-4">About Us</h1>
-//         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-//           We are a dedicated tutoring platform connecting students with expert tutors. Our mission is to make learning accessible, personalized, and effective for everyone.
-//         </p>
-//       </section>
-
-//       {/* Mission Section */}
-//       <section className="py-12">
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-//           <div>
-//             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h2>
-//             <p className="text-gray-700 leading-relaxed">
-//               At our core, we aim to empower students by providing access to quality education and support. We enable students to browse and filter tutors by subject or location, post job requests, and manage their learning journey seamlessly. For tutors, we offer tools to create listings, build public profiles, and apply to student requests, all while ensuring secure payments and admin oversight.
-//             </p>
-//           </div>
-//           <div className="bg-blue-100 rounded-lg p-6">
-//             <h3 className="text-lg font-medium text-gray-800 mb-2">Why Choose Us?</h3>
-//             <ul className="list-disc list-inside text-gray-700 space-y-2">
-//               <li>Mobile-responsive platform for learning on the go</li>
-//               <li>Secure payment system with Stripe integration</li>
-//               <li>Role-based admin panel for user and content management</li>
-//               <li>Optional Zoom integration for video-based tutoring</li>
-//             </ul>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Features Highlight */}
-//       <section className="py-12 border-t border-gray-200">
-//         <h2 className="text-2xl font-semibold text-gray-800 text-center mb-8">What We Offer</h2>
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-//             <h3 className="text-lg font-medium text-gray-800 mb-2">For Students</h3>
-//             <p className="text-gray-700">
-//               Find tutors by subject or location, post job requests, and manage your profile with ease.
-//             </p>
-//           </div>
-//           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-//             <h3 className="text-lg font-medium text-gray-800 mb-2">For Tutors</h3>
-//             <p className="text-gray-700">
-//               Create listings, build your public profile, and apply to student requests anytime.
-//             </p>
-//           </div>
-//           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-//             <h3 className="text-lg font-medium text-gray-800 mb-2">For Admins</h3>
-//             <p className="text-gray-700">
-//               Manage users, verify tutors, monitor jobs, and track platform statistics securely.
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Call to Action */}
-//       <section className="py-12 text-center">
-//         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Join Our Community</h2>
-//         <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-//           Whether you're a student seeking help or a tutor ready to make an impact, we're here to support your journey.
-//         </p>
-//         <a
-//           href="/register"
-//           className="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-//         >
-//           Get Started
-//         </a>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default AboutUs;
-
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaGraduationCap, FaUsers, FaChalkboardTeacher, FaGlobe, FaLinkedin, 
   FaTwitter, FaEnvelope, FaCheckCircle, FaStar, FaClock, FaShieldAlt, 
   FaHandshake, FaLightbulb, FaChartLine, FaAward } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import { useLanguage } from '../../providers/LanguageProvider';
+import imge1 from '../../assets/AboutUs3.jpg';
+import imge2 from '../../assets/AboutUs2.jpg';
+import imge3 from '../../assets/AboutUs.jpg';
 
 const SectionHeader = ({ title, subtitle, isDark = false }) => {
   const { translate } = useLanguage();
@@ -92,40 +17,40 @@ const SectionHeader = ({ title, subtitle, isDark = false }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-center mb-16"
+      className="text-center mb-12 sm:mb-16"
     >
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center px-4 sm:px-0">
         <div className="relative">
-          <h2 className={`text-6xl font-bold mb-4 ${
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${
             isDark ? 'text-white' : 'bg-gradient-to-r from-[#005482] via-[#70C5D7] to-[#005482] text-transparent bg-clip-text'
           }`}>
             {translate(title)}
           </h2>
           {/* Decorative Elements */}
-          <div className="absolute -top-6 -left-6 w-12 h-12 border-t-4 border-l-4 border-[#FCBB45] rounded-tl-lg"></div>
-          <div className="absolute -bottom-6 -right-6 w-12 h-12 border-b-4 border-r-4 border-[#DA3A60] rounded-br-lg"></div>
+          <div className="absolute -top-4 sm:-top-6 -left-4 sm:-left-6 w-8 sm:w-12 h-8 sm:h-12 border-t-4 border-l-4 border-[#FCBB45] rounded-tl-lg"></div>
+          <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-8 sm:w-12 h-8 sm:h-12 border-b-4 border-r-4 border-[#DA3A60] rounded-br-lg"></div>
         </div>
         {/* Animated Lines */}
-        <div className="flex items-center gap-4 mt-6">
+        <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-6">
           <motion.div 
             initial={{ width: 0 }}
-            whileInView={{ width: '3rem' }}
+            whileInView={{ width: '2rem', sm: '3rem' }}
             viewport={{ once: true }}
-            className={`h-1 ${isDark ? 'bg-[#FCBB45]' : 'bg-[#DA3A60]'}`}
+            className={`h-0.5 sm:h-1 ${isDark ? 'bg-[#FCBB45]' : 'bg-[#DA3A60]'}`}
           ></motion.div>
-          <div className={`w-2 h-2 rounded-full ${isDark ? 'bg-white' : 'bg-[#005482]'}`}></div>
+          <div className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${isDark ? 'bg-white' : 'bg-[#005482]'}`}></div>
           <motion.div 
             initial={{ width: 0 }}
-            whileInView={{ width: '5rem' }}
+            whileInView={{ width: '3rem', sm: '5rem' }}
             viewport={{ once: true }}
-            className={`h-1 ${isDark ? 'bg-white' : 'bg-[#70C5D7]'}`}
+            className={`h-0.5 sm:h-1 ${isDark ? 'bg-white' : 'bg-[#70C5D7]'}`}
           ></motion.div>
-          <div className={`w-2 h-2 rounded-full ${isDark ? 'bg-white' : 'bg-[#005482]'}`}></div>
+          <div className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${isDark ? 'bg-white' : 'bg-[#005482]'}`}></div>
           <motion.div 
             initial={{ width: 0 }}
-            whileInView={{ width: '3rem' }}
+            whileInView={{ width: '2rem', sm: '3rem' }}
             viewport={{ once: true }}
-            className={`h-1 ${isDark ? 'bg-[#FCBB45]' : 'bg-[#DA3A60]'}`}
+            className={`h-0.5 sm:h-1 ${isDark ? 'bg-[#FCBB45]' : 'bg-[#DA3A60]'}`}
           ></motion.div>
         </div>
         {subtitle && (
@@ -133,7 +58,7 @@ const SectionHeader = ({ title, subtitle, isDark = false }) => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={`text-xl mt-6 max-w-3xl mx-auto ${
+            className={`text-base sm:text-lg md:text-xl mt-4 sm:mt-6 max-w-3xl mx-auto px-4 sm:px-6 ${
               isDark ? 'text-white/80' : 'text-gray-600'
             }`}
           >
@@ -157,17 +82,17 @@ const AboutUs = () => {
   ];
 
   const milestones = [
-    { year: '2023', title: 'Platform Launch', description: 'LessonPaw was founded with a vision to transform education in Haiti' },
-    { year: '2023', title: 'First 1000 Students', description: 'Reached our first milestone of helping 1000 students' },
-    { year: '2024', title: 'Mobile App Launch', description: 'Expanded our reach with a dedicated mobile application' },
-    { year: '2024', title: 'National Recognition', description: 'Recognized as leading educational platform in Haiti' }
+    { year: '2023', title: 'Idea Launch', description: 'LesonPaw was founded with a vision to transform education in Haiti' },
+    { year: '2024', title: 'First Prototype Launch', description: 'Reached our first milestone of helping students' },
+    { year: '2024', title: 'Web Application Launch', description: 'Expanded our reach with a dedicated Web application' },
+    { year: '2025', title: 'National Recognition', description: 'Recognized as leading educational platform in Haiti' }
   ];
 
   const teamMembers = [
     {
       name: 'Jean Baptiste',
       role: 'Founder & CEO',
-      image: 'https://example.com/placeholder.jpg',
+     image: imge1,
       bio: 'Passionate about making education accessible to all Haitian students.',
       achievements: ['10+ years in EdTech', 'Harvard Business School Graduate', 'Education Innovation Award 2023'],
       social: { linkedin: '#', twitter: '#', email: '#' }
@@ -175,7 +100,7 @@ const AboutUs = () => {
     {
       name: 'Marie Claire',
       role: 'Head of Education',
-      image: 'https://example.com/placeholder.jpg',
+      image: imge2,
       bio: 'Expert in curriculum development with 10+ years of teaching experience.',
       achievements: ['Former University Professor', 'Published Education Author', 'National Teaching Excellence Award'],
       social: { linkedin: '#', twitter: '#', email: '#' }
@@ -183,7 +108,7 @@ const AboutUs = () => {
     {
       name: 'Pierre Paul',
       role: 'Technical Lead',
-      image: 'https://example.com/placeholder.jpg',
+     image: imge3,
       bio: 'Ensuring seamless learning experiences through technology.',
       achievements: ['15+ Years in Tech', 'MIT Computer Science', 'Multiple Tech Patents'],
       social: { linkedin: '#', twitter: '#', email: '#' }
@@ -200,16 +125,16 @@ const AboutUs = () => {
   return (
     <div className="w-full">
       {/* Hero Section with Parallax Effect */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80vh] sm:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-0">
         <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7]">
           <div className="absolute inset-0 bg-[url('/path-to-pattern.png')] opacity-10"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-6xl font-bold text-white mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight"
           >
             {translate('transformingEducation')}<br />{translate('inHaiti')}
           </motion.h1>
@@ -217,13 +142,13 @@ const AboutUs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-2xl text-white/90 max-w-3xl mx-auto mb-12"
+            className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 sm:mb-12 px-4"
           >
             {translate('buildingBridges')}
           </motion.p>
           
           {/* Animated Stats with Hover Effects */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mt-8 sm:mt-16">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -231,14 +156,14 @@ const AboutUs = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
               >
-                <div className="text-[#FCBB45] text-4xl mb-4">{stat.icon}</div>
-                <div className="text-white text-4xl font-bold mb-2">
+                <div className="text-[#FCBB45] text-3xl sm:text-4xl mb-3 sm:mb-4">{stat.icon}</div>
+                <div className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                   <CountUp end={stat.number} duration={2.5} suffix={stat.suffix || ''} />
                 </div>
-                <div className="text-white/90 font-medium mb-2">{stat.label}</div>
-                <div className="text-white/70 text-sm">{stat.description}</div>
+                <div className="text-white/90 font-medium mb-1 sm:mb-2 text-sm sm:text-base">{stat.label}</div>
+                <div className="text-white/70 text-xs sm:text-sm">{stat.description}</div>
               </motion.div>
             ))}
           </div>
@@ -248,27 +173,27 @@ const AboutUs = () => {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2"
         >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
+          <div className="w-5 sm:w-6 h-8 sm:h-10 border-2 border-white rounded-full flex justify-center">
+            <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white rounded-full mt-2"></div>
           </div>
         </motion.div>
       </section>
 
       {/* Vision & Mission with Interactive Tabs */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader 
             title="ourPurpose"
             subtitle="empoweringEducation"
           />
 
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-8 sm:mb-12">
             <div className="inline-flex rounded-lg border border-[#005482] p-1">
               <button
                 onClick={() => setActiveTab('students')}
-                className={`px-6 py-3 rounded-md transition-colors ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md text-sm sm:text-base transition-colors ${
                   activeTab === 'students'
                     ? 'bg-[#005482] text-white'
                     : 'text-[#005482] hover:bg-[#005482]/10'
@@ -278,7 +203,7 @@ const AboutUs = () => {
               </button>
               <button
                 onClick={() => setActiveTab('tutors')}
-                className={`px-6 py-3 rounded-md transition-colors ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md text-sm sm:text-base transition-colors ${
                   activeTab === 'tutors'
                     ? 'bg-[#005482] text-white'
                     : 'text-[#005482] hover:bg-[#005482]/10'
@@ -289,81 +214,81 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
             {activeTab === 'students' ? (
               <>
-                <div className="bg-gradient-to-br from-[#005482] to-[#70C5D7] rounded-2xl p-8">
-                  <h3 className="text-4xl font-bold text-white mb-8">{translate('forStudents')}</h3>
-                  <ul className="space-y-6">
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                <div className="bg-gradient-to-br from-[#005482] to-[#70C5D7] rounded-2xl p-6 sm:p-8">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">{translate('forStudents')}</h3>
+                  <ul className="space-y-4 sm:space-y-6">
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('accessToTutors')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('accessToTutors')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('flexibleScheduling')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('flexibleScheduling')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('personalizedLearning')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('personalizedLearning')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('progressTracking')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('progressTracking')}</span>
                     </li>
                   </ul>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center lg:px-8">
                   <img 
-                    src="https://example.com/student-image.jpg" 
+                    src={imge1} 
                     alt="Student Learning"
-                    className="rounded-2xl shadow-xl max-w-md w-full"
+                    className="rounded-2xl shadow-xl w-full h-[500px] object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </>
             ) : (
               <>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center lg:px-8">
                   <img 
-                    src="https://example.com/tutor-image.jpg" 
+                    src={imge2} 
                     alt="Tutor Teaching"
-                    className="rounded-2xl shadow-xl max-w-md w-full"
+                    className="rounded-2xl shadow-xl w-full h-[500px] object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="bg-gradient-to-br from-[#005482] to-[#70C5D7] rounded-2xl p-8">
-                  <h3 className="text-4xl font-bold text-white mb-8">{translate('forTutors')}</h3>
-                  <ul className="space-y-6">
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                <div className="bg-gradient-to-br from-[#005482] to-[#70C5D7] rounded-2xl p-6 sm:p-8">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8">{translate('forTutors')}</h3>
+                  <ul className="space-y-4 sm:space-y-6">
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('buildProfile')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('buildProfile')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('setSchedule')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('setSchedule')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('teachingResources')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('teachingResources')}</span>
                     </li>
-                    <li className="flex items-start gap-4">
-                      <div className="bg-[#FCBB45] rounded-full p-1">
-                        <FaCheckCircle className="text-white w-6 h-6" />
+                    <li className="flex items-start gap-3 sm:gap-4">
+                      <div className="bg-[#FCBB45] rounded-full p-1 sm:p-1.5 mt-1">
+                        <FaCheckCircle className="text-white w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-white text-xl">{translate('securePayment')}</span>
+                      <span className="text-white text-base sm:text-xl">{translate('securePayment')}</span>
                     </li>
                   </ul>
                 </div>
@@ -374,7 +299,7 @@ const AboutUs = () => {
       </section>
 
       {/* Our Journey Timeline */}
-      <section className="py-20 bg-[#F8FAFC]">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#F8FAFC] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader 
             title="Our Journey" 
@@ -383,10 +308,10 @@ const AboutUs = () => {
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#70C5D7]"></div>
+            <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 sm:w-1 bg-[#70C5D7] transform -translate-x-1/2"></div>
 
             {/* Timeline Items */}
-            <div className="space-y-16">
+            <div className="space-y-8 sm:space-y-16">
               {milestones.map((milestone, index) => (
                 <motion.div
                   key={index}
@@ -394,23 +319,24 @@ const AboutUs = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className={`flex items-center ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                  className={`flex flex-col sm:flex-row items-start sm:items-center ${
+                    index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
                   }`}
                 >
-                  <div className="w-1/2 pr-8 text-right">
+                  <div className={`w-full sm:w-1/2 pl-12 sm:pl-0 ${
+                    index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8'
+                  }`}>
                     <div className={`${
-                      index % 2 === 0 ? 'text-right' : 'text-left'
+                      index % 2 === 0 ? 'sm:text-right' : 'sm:text-left'
                     }`}>
-                      <h3 className="text-2xl font-bold text-[#005482] mb-2">{milestone.year}</h3>
-                      <h4 className="text-xl text-[#DA3A60] mb-2">{milestone.title}</h4>
-                      <p className="text-gray-600">{milestone.description}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#005482] mb-2">{milestone.year}</h3>
+                      <h4 className="text-lg sm:text-xl text-[#DA3A60] mb-2">{milestone.title}</h4>
+                      <p className="text-sm sm:text-base text-gray-600">{milestone.description}</p>
                     </div>
                   </div>
-                  <div className="relative flex items-center justify-center w-8 h-8">
-                    <div className="absolute w-4 h-4 bg-[#FCBB45] rounded-full"></div>
+                  <div className="absolute left-0 sm:left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+                    <div className="w-8 h-8 bg-[#FCBB45] rounded-full border-4 border-white shadow-lg"></div>
                   </div>
-                  <div className="w-1/2 pl-8"></div>
                 </motion.div>
               ))}
             </div>
@@ -419,7 +345,7 @@ const AboutUs = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-[#005482]">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#005482]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader 
             title="ourValues"
@@ -427,7 +353,7 @@ const AboutUs = () => {
             isDark={true}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {values.map((value, index) => (
               <motion.div
                 key={index}
@@ -435,26 +361,26 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-xl p-8 text-center hover:transform hover:scale-105 transition-transform duration-300"
+                className="bg-white rounded-xl p-6 sm:p-8 text-center hover:transform hover:scale-105 transition-transform duration-300"
               >
-                <div className="text-[#FCBB45] text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-[#005482] mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <div className="text-[#FCBB45] text-3xl sm:text-4xl mb-4">{value.icon}</div>
+                <h3 className="text-lg sm:text-xl font-bold text-[#005482] mb-2">{value.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Enhanced Team Section */}
-      <section className="py-20 bg-white">
+      {/* Team Section */}
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader 
             title="Meet Our Team" 
             subtitle="Our dedicated team of professionals working to make quality education accessible to all"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
@@ -462,28 +388,28 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-48 sm:h-56 lg:h-64 object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <h3 className="text-2xl font-bold">{member.name}</h3>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">{member.name}</h3>
                     <p className="text-[#FCBB45]">{member.role}</p>
                   </div>
                 </div>
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4">{member.bio}</p>
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-[#005482] mb-2">Achievements:</h4>
+                <div className="p-4 sm:p-6">
+                  <p className="text-sm sm:text-base text-gray-600 mb-4">{member.bio}</p>
+                  <div className="mb-4 sm:mb-6">
+                    <h4 className="text-xs sm:text-sm font-semibold text-[#005482] mb-2">Achievements:</h4>
                     <ul className="space-y-2">
                       {member.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                          <FaStar className="text-[#FCBB45]" />
+                        <li key={i} className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                          <FaStar className="text-[#FCBB45] flex-shrink-0" />
                           {achievement}
                         </li>
                       ))}
@@ -491,13 +417,13 @@ const AboutUs = () => {
                   </div>
                   <div className="flex justify-center space-x-4 pt-4 border-t border-gray-200">
                     <a href={member.social.linkedin} className="text-[#005482] hover:text-[#DA3A60] transition-colors">
-                      <FaLinkedin size={24} />
+                      <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                     </a>
                     <a href={member.social.twitter} className="text-[#005482] hover:text-[#DA3A60] transition-colors">
-                      <FaTwitter size={24} />
+                      <FaTwitter className="w-5 h-5 sm:w-6 sm:h-6" />
                     </a>
                     <a href={member.social.email} className="text-[#005482] hover:text-[#DA3A60] transition-colors">
-                      <FaEnvelope size={24} />
+                      <FaEnvelope className="w-5 h-5 sm:w-6 sm:h-6" />
                     </a>
                   </div>
                 </div>
@@ -508,59 +434,57 @@ const AboutUs = () => {
       </section>
 
       {/* Trust & Security Section */}
-      <section className="py-20 bg-[#F8FAFC]">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader 
             title="trustAndSecurity"
             subtitle="yourSafety"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="text-[#FCBB45] text-2xl">
-                    <FaShieldAlt />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#005482] mb-2">{translate('verifiedTutors')}</h3>
-                    <p className="text-gray-600">{translate('tutorsVerified')}</p>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="text-[#FCBB45] text-xl sm:text-2xl flex-shrink-0">
+                  <FaShieldAlt />
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="text-[#FCBB45] text-2xl">
-                    <FaClock />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#005482] mb-2">{translate('support247')}</h3>
-                    <p className="text-gray-600">{translate('supportAvailable')}</p>
-                  </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#005482] mb-2">{translate('verifiedTutors')}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{translate('tutorsVerified')}</p>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="text-[#FCBB45] text-2xl">
-                    <FaHandshake />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#005482] mb-2">{translate('satisfactionGuarantee')}</h3>
-                    <p className="text-gray-600">{translate('qualityEducation')}</p>
-                  </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#FCBB45] text-xl sm:text-2xl flex-shrink-0">
+                  <FaClock />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#005482] mb-2">{translate('support247')}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{translate('supportAvailable')}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#FCBB45] text-xl sm:text-2xl flex-shrink-0">
+                  <FaHandshake />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#005482] mb-2">{translate('satisfactionGuarantee')}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{translate('qualityEducation')}</p>
                 </div>
               </div>
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7] rounded-xl transform rotate-3"></div>
               <img
-                src="https://example.com/security-image.jpg"
+                src={imge3}
                 alt="Trust & Security"
-                className="relative rounded-xl shadow-xl"
+                className="relative rounded-xl shadow-xl w-full"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Call-to-Action */}
-      <section className="relative py-20 overflow-hidden">
+      {/* Call-to-Action */}
+      <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7]">
           <div className="absolute inset-0 bg-[url('/path-to-pattern.png')] opacity-10"></div>
         </div>
@@ -571,17 +495,17 @@ const AboutUs = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">{translate('readyToTransform')}</h2>
-            <p className="text-xl text-white/90 mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">{translate('readyToTransform')}</h2>
+            <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8">
               {translate('joinThousands')}
             </p>
             <div className="flex justify-center">
-              <a
-                href="/register"
-                className="inline-block bg-[#DA3A60] text-white px-12 py-4 rounded-xl font-medium hover:bg-[#DA3A60]/90 transition-colors text-lg"
+              <Link
+                to="/signup"
+                className="inline-block bg-[#DA3A60] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-medium hover:bg-[#DA3A60]/90 transition-colors text-base sm:text-lg"
               >
                 {translate('getStarted')}
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -590,4 +514,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs
+export default AboutUs;

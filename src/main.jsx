@@ -37,7 +37,7 @@ import AuthProvider from './providers/AuthProvider';
 import LanguageProvider from './providers/LanguageProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // <-- Import toast styles
+import 'react-toastify/dist/ReactToastify.css'; 
 const queryClient = new QueryClient();
 
 

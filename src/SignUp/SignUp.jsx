@@ -1,185 +1,5 @@
 
 
-
-// import React, { useContext } from "react";
-
-// import { useForm } from "react-hook-form";
-
-// import { Link, useNavigate } from "react-router-dom";
-// import Swal from "sweetalert2";
-
-// import { AuthContext } from "../providers/AuthProvider";
-// import SocialLogin from "../components/SocialLogin";
-// import useAxiosPublic from "../hooks/UseAxiosPublic";
-
-
-
-// const SignUp = () => {
-//   const axiosPublic = useAxiosPublic();
-//   const {
-//     register,
-//     handleSubmit,
-//     reset,
-//     formState: { errors },
-//   } = useForm();
-
-//   const {createUser,updateUserProfile} = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-  
-//   const onSubmit = (data) => {
-//     createUser(data.email, data.password)
-//     .then(result => {
-//         const loggedUser = result.user;
-//         console.log("User Created:", loggedUser);
-
-//         updateUserProfile(data.name, data.photoURL)
-//         .then(() => {
-//             console.log("User profile info updated");
-
-            
-//             const userInfo = {
-//                 uid: loggedUser.uid, 
-//                 name: data.name,
-//                 email: data.email,
-//                 photoURL: data.photoURL
-//             };
-
-//             axiosPublic.post('/users', userInfo)
-//             .then(res => {
-//                 if (res.data.insertedId) {
-//                     console.log("User added to the database");
-//                     reset();
-//                     Swal.fire({
-//                         position: "top-end",
-//                         icon: "success",
-//                         title: "User Created Successfully",
-//                         showConfirmButton: false,
-//                         timer: 1500
-//                     });
-//                     navigate('/');
-//                 }
-//             })
-//             .catch(error => console.log("Database Error:", error));
-
-//         })
-//         .catch(error => console.log("Profile Update Error:", error));
-//     })
-//     .catch(error => console.log("Create User Error:", error));
-// };
-
-//   return (
-//     <div className="hero   card bg-base-100 shadow-2xl card-body ">
-//       <div className="hero-content flex-col md:flex-row-reverse gap-5">
-//         <div className="text-center lg:text-left">
-//           <h1 className="text-5xl font-bold">Sign Up</h1>
-//           {/* <Lottie
-//             animationData={signUpLottieData}
-//             style={{ width: "300px", height: "300px" }}
-//           ></Lottie> */}
-//         </div>
-//         <div className="  md:w-1/2 max-w-sm">
-//           <form onSubmit={handleSubmit(onSubmit)} className="">
-//             <div className="form-control">
-//               <label className="label">
-//                 <span className="label-text">Name</span>
-//               </label>
-//               <input
-//                 type="text"
-//                 placeholder="Name"
-//                 name="name"
-//                 {...register("name", { required: true })}
-//                 className="input input-bordered"
-//               />
-//               {errors.name && (
-//                 <span className="text-red-500">name is required</span>
-//               )}
-//             </div>
-//             <div className="form-control">
-//               <label className="label">
-//                 <span className="label-text">Photo URL</span>
-//               </label>
-//               <input
-//                 type="text"
-//                 placeholder="photoURL"
-//                 name="photoURL"
-//                 {...register("photoURL", { required: true })}
-//                 className="input input-bordered"
-//               />
-//               {errors.photoURL && (
-//                 <span className="text-red-500">Photo URL is required</span>
-//               )}
-//             </div>
-//             <div className="form-control">
-//               <label className="label">
-//                 <span className="label-text">Email</span>
-//               </label>
-//               <input
-//                 type="email"
-//                 placeholder="email"
-//                 name="email"
-//                 {...register("email", { required: true })}
-//                 className="input input-bordered"
-//               />
-//               {errors.email && (
-//                 <span className="text-red-500">email is required</span>
-//               )}
-//             </div>
-//             <div className="form-control">
-//               <label className="label">
-//                 <span className="label-text">Password</span>
-//               </label>
-//               <input
-//                 type="password"
-//                 {...register("password", {
-//                   required: true,
-//                   minLength: 6,
-//                   maxLength: 20,
-//                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-//                 })}
-//                 placeholder="password"
-//                 className="input input-bordered"
-//               />
-//               {errors.password?.type === "required" && (
-//                 <p className="text-red-600">Password is required</p>
-//               )}
-//               {errors.password?.type === "minLength" && (
-//                 <p className="text-red-600">Password must be 6 characters</p>
-//               )}
-//               {errors.password?.type === "maxLength" && (
-//                 <p className="text-red-600">
-//                   Password must be less than 20 characters
-//                 </p>
-//               )}
-//               {errors.password?.type === "pattern" && (
-//                 <p className="text-red-600">
-//                   Password must have one Uppercase one lower case, one number
-//                   and one special character.
-//                 </p>
-//               )}
-//               <label className="label">
-//                 <a href="#" className="label-text-alt link link-hover">
-//                   Forgot password?
-//                 </a>
-//               </label>
-//             </div>
-//             <div className="form-control mt-6">
-//                 <input className="btn btn-primary" type="submit" value="Sign up" />
-               
-//             </div>
-//           </form>
-//           <p className="px-6 py-4"><small>New here ? <Link to ="/signup">Create an account</Link></small></p>
-          
-//           <SocialLogin></SocialLogin>
-//         </div>
-//       </div>
-      
-//     </div>
-//   );
-// };
-
-// export default SignUp;
-
 // import React, { useContext } from "react";
 // import { useForm } from "react-hook-form";
 // import { Link, useNavigate } from "react-router-dom";
@@ -358,191 +178,867 @@
 // export default SignUp;
 
 
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
+// import { useForm } from "react-hook-form";
+// import { Link, useNavigate } from "react-router-dom";
+// import Swal from "sweetalert2";
+// import { AuthContext } from "../providers/AuthProvider";
+// import SocialLogin from "../components/SocialLogin";
+// import useAxiosPublic from "../hooks/UseAxiosPublic";
+
+// const SignUp = () => {
+//   const axiosPublic = useAxiosPublic();
+//   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+//   const { createUser, updateUserProfile } = useContext(AuthContext);
+//   const navigate = useNavigate();
+
+//   const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+//   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+//   const handleImageUpload = async (photo) => {
+//     if (!photo) return null;
+
+//     const formData = new FormData();
+//     formData.append("image", photo);
+
+//     try {
+//       const res = await fetch(image_hosting_api, {
+//         method: "POST",
+//         body: formData,
+//       });
+//       const imageData = await res.json();
+//       return imageData.success ? imageData.data.url : null;
+//     } catch (error) {
+//       console.error("Image Upload Error:", error);
+//       return null;
+//     }
+//   };
+
+//   const onSubmit = async (data) => {
+//     const photoFile = data.photo?.[0];
+//     const uploadedPhotoURL = await handleImageUpload(photoFile);
+
+//     try {
+//       const result = await createUser(data.email, data.password);
+//       const loggedUser = result.user;
+
+//       // await updateUserProfile({
+//       //   displayName: String(data.name || ""),
+//       //   photoURL: String(uploadedPhotoURL || ""),
+//       // });
+
+//       await updateUserProfile(
+//   String(data.name || ""),
+//   String(uploadedPhotoURL || "")
+// );
+
+
+//       const userInfo = {
+//         uid: loggedUser.uid,
+//         name: data.name,
+//         email: data.email,
+//         photoURL: uploadedPhotoURL || "",
+//       };
+
+//       const res = await axiosPublic.post("/users", userInfo);
+
+//       if (res.data.insertedId) {
+//         reset();
+//         Swal.fire({
+//           position: "top-end",
+//           icon: "success",
+//           title: "Account Created Successfully",
+//           showConfirmButton: false,
+//           timer: 1500,
+//         });
+//         navigate("/");
+//       }
+//     } catch (error) {
+//       console.error("Signup Error:", error);
+//       Swal.fire("Error", error.message, "error");
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 flex items-center justify-center px-4">
+//       <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl w-full">
+
+//         {/* Left Panel */}
+//         <div className="text-center md:text-left text-white max-w-md">
+//           <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome!</h1>
+//           <p className="mb-5 text-gray-200">
+//             Join us and explore a world of opportunities. Already have an account?
+//           </p>
+//           <Link
+//             to="/login"
+//             className="inline-block px-6 py-2 rounded-md border border-white text-white hover:bg-white hover:text-blue-800 transition duration-300"
+//           >
+//             Sign In
+//           </Link>
+//         </div>
+
+//         {/* Sign Up Form */}
+//         <div className="card w-full max-w-md bg-white shadow-xl rounded-lg">
+//           <form onSubmit={handleSubmit(onSubmit)} className="card-body p-6 space-y-4">
+//             <h2 className="text-2xl font-bold text-center text-blue-800">Create Account</h2>
+
+//             {/* Social Login */}
+//             <SocialLogin />
+//             <div className="divider text-gray-400 text-sm">or use your email</div>
+
+//             {/* Name */}
+//             <div className="form-control">
+//               <label className="label text-sm text-blue-800">Name</label>
+//               <input
+//                 type="text"
+//                 placeholder="Full Name"
+//                 {...register("name", { required: "Name is required" })}
+//                 className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
+//               />
+//               {errors.name && <span className="text-red-600 text-sm">{errors.name.message}</span>}
+//             </div>
+
+//             {/* Email */}
+//             <div className="form-control">
+//               <label className="label text-sm text-blue-800">Email</label>
+//               <input
+//                 type="email"
+//                 placeholder="Email"
+//                 {...register("email", { required: "Email is required" })}
+//                 className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
+//               />
+//               {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
+//             </div>
+
+//             {/* Password */}
+//             <div className="form-control">
+//               <label className="label text-sm text-blue-800">Password</label>
+//               <input
+//                 type="password"
+//                 placeholder="Password"
+//                 {...register("password", {
+//                   required: "Password is required",
+//                   minLength: { value: 6, message: "Min 6 characters" },
+//                   maxLength: { value: 20, message: "Max 20 characters" },
+//                   pattern: {
+//                     value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+//                     message: "Must include uppercase, lowercase, number & symbol",
+//                   },
+//                 })}
+//                 className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
+//               />
+//               {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
+//               <label className="label">
+//                 <Link to="/forgot-password" className="label-text-alt text-sm text-blue-600 hover:underline">
+//                   Forgot password?
+//                 </Link>
+//               </label>
+//             </div>
+
+//             {/* Photo (Optional) */}
+//             <div className="form-control">
+//               <label className="label text-sm text-blue-800">
+//                 Profile Photo <span className="text-gray-500">(optional)</span>
+//               </label>
+//               <input
+//                 type="file"
+//                 accept="image/*"
+//                 {...register("photo")}
+//                 className="file-input file-input-bordered w-full bg-white border-blue-300"
+//               />
+//             </div>
+
+//             {/* Submit */}
+//             <button type="submit" className="btn bg-blue-600 hover:bg-blue-700 text-white mt-2 w-full">
+//               Sign Up
+//             </button>
+
+//             {/* Redirect */}
+//             <p className="text-sm text-center text-gray-600">
+//               Already have an account?{" "}
+//               <Link to="/login" className="text-blue-600 hover:underline">Sign In</Link>
+//             </p>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SignUp;
+
+
+
+// import React, { useContext, useEffect, useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { Link, useNavigate } from "react-router-dom";
+// import Swal from "sweetalert2";
+// import { AuthContext } from "../providers/AuthProvider";
+// import SocialLogin from "../components/SocialLogin";
+// import useAxiosPublic from "../hooks/UseAxiosPublic";
+// import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+
+// const SignUp = () => {
+//     const [disabled, setDisabled] = useState(true);
+//     const [termsAccepted, setTermsAccepted] = useState(false);
+//     const axiosPublic = useAxiosPublic();
+//     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+//     const { createUser, updateUserProfile } = useContext(AuthContext);
+//     const navigate = useNavigate();
+
+//     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+//     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+//     useEffect(() => {
+//         loadCaptchaEnginge(6);
+//     }, []);
+
+//     const handleValidateCaptcha = (element) => {
+//         const captchaValue = element.value;
+//         if (validateCaptcha(captchaValue)) {
+//             setDisabled(false);
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Captcha Validated!',
+//                 showConfirmButton: false,
+//                 timer: 1500
+//             });
+//         } else {
+//             setDisabled(true);
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Invalid Captcha',
+//                 text: 'Please try again',
+//                 confirmButtonText: 'Ok'
+//             });
+//         }
+//     };
+
+//     const handleImageUpload = async (photo) => {
+//         const formData = new FormData();
+//         formData.append('image', photo);
+
+//         try {
+//             const response = await fetch(image_hosting_api, {
+//                 method: 'POST',
+//                 body: formData
+//             });
+//             const data = await response.json();
+//             return data.data.url;
+//         } catch (error) {
+//             console.error('Image upload failed:', error);
+//             return null;
+//         }
+//     };
+
+//     const onSubmit = async (data) => {
+//         if (!termsAccepted) {
+//             Swal.fire({
+//                 title: 'Terms & Conditions Required',
+//                 text: 'Please accept the terms and conditions to continue',
+//                 icon: 'warning',
+//                 confirmButtonText: 'Ok'
+//             });
+//             return;
+//         }
+
+//         let photoURL = data.photoURL;
+//         if (data.photo && data.photo[0]) {
+//             photoURL = await handleImageUpload(data.photo[0]);
+//             if (!photoURL) {
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Image Upload Failed',
+//                     text: 'Please try again or use a photo URL instead.'
+//                 });
+//                 return;
+//             }
+//         }
+
+//         createUser(data.email, data.password)
+//             .then(result => {
+//                 const loggedUser = result.user;
+//                 console.log("User Created:", loggedUser);
+
+//                 updateUserProfile(data.name, photoURL)
+//                     .then(() => {
+//                         console.log("User profile info updated");
+//                         const userInfo = {
+//                             uid: loggedUser.uid,
+//                             name: data.name,
+//                             email: data.email,
+//                             photoURL: photoURL
+//                         };
+
+//                         axiosPublic.post('/users', userInfo)
+//                             .then(res => {
+//                                 if (res.data.insertedId) {
+//                                     console.log("User added to the database");
+//                                     reset();
+//                                     Swal.fire({
+//                                         position: "top-end",
+//                                         icon: "success",
+//                                         title: "User Created Successfully",
+//                                         showConfirmButton: false,
+//                                         timer: 1500
+//                                     });
+//                                     navigate('/');
+//                                 }
+//                             })
+//                             .catch(error => console.log("Database Error:", error));
+//                     })
+//                     .catch(error => console.log("Profile Update Error:", error));
+//             })
+//             .catch(error => console.log("Create User Error:", error));
+//     };
+
+//     return (
+//         <div className="min-h-screen w-full bg-[#005482] flex fixed inset-0">
+//             {/* Left Section with Illustration */}
+//             <div className="hidden lg:flex lg:w-1/2 bg-[#70C5D7] items-center justify-center p-12">
+//                 <div className="max-w-lg">
+//                     <h2 className="text-4xl font-bold text-white mb-6">Join <span className="text-[#FCBB45]">LessonPaw</span> Today!</h2>
+//                     <p className="text-xl text-white/90">Connect with a community of educators and learners. Share knowledge, discover resources, and grow together.</p>
+//                     {/* You can add your illustration here */}
+//                     <div className="mt-8">
+//                         <img 
+//                             src="/path-to-your-illustration.svg" 
+//                             alt="Progress Illustration"
+//                             className="w-full max-w-md mx-auto"
+//                         />
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Right Section with Form */}
+//             <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-6 overflow-y-auto">
+//                 <div className="w-full max-w-md space-y-8">
+//                     {/* Header */}
+//                     <div className="text-center">
+//                         <h1 className="text-3xl font-bold text-[#005482] mb-2">Welcome!</h1>
+//                         <p className="text-gray-600">Create your account to get started</p>
+//                     </div>
+
+//                     {/* Sign Up Form */}
+//                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+//                         <div className="space-y-4">
+//                             {/* Name Input */}
+//                             <div>
+//                                 <input
+//                                     type="text"
+//                                     placeholder="Your name *"
+//                                     {...register("name", { required: "Name is required" })}
+//                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+//                                 />
+//                                 {errors.name && (
+//                                     <span className="text-[#DA3A60] text-sm mt-1">{errors.name.message}</span>
+//                                 )}
+//                             </div>
+
+//                             {/* Photo Upload */}
+//                             <div className="space-y-2">
+//                                 <label className="block text-sm font-medium text-gray-700 mb-1">
+//                                     Profile Photo
+//                                 </label>
+//                                 <div className="space-y-2">
+//                                     <div className="flex items-center space-x-2">
+//                                         <input
+//                                             type="file"
+//                                             accept="image/*"
+//                                             {...register("photo")}
+//                                             className="hidden"
+//                                             id="photo-upload"
+//                                         />
+//                                         <label
+//                                             htmlFor="photo-upload"
+//                                             className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#70C5D7]"
+//                                         >
+//                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+//                                             </svg>
+//                                             Choose Photo
+//                                         </label>
+//                                         <span className="text-sm text-gray-500">or</span>
+//                                     </div>
+//                                     <input
+//                                         type="text"
+//                                         placeholder="Enter photo URL"
+//                                         {...register("photoURL")}
+//                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482] text-sm"
+//                                     />
+//                                     <p className="text-xs text-gray-500">
+//                                         Upload a photo or provide an image URL
+//                                     </p>
+//                                 </div>
+//                             </div>
+
+//                             {/* Email Input */}
+//                             <div>
+//                                 <input
+//                                     type="email"
+//                                     placeholder="Your email address *"
+//                                     {...register("email", { required: "Email is required" })}
+//                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+//                                 />
+//                                 {errors.email && (
+//                                     <span className="text-[#DA3A60] text-sm mt-1">{errors.email.message}</span>
+//                                 )}
+//                             </div>
+
+//                             {/* Password Input */}
+//                             <div>
+//                                 <input
+//                                     type="password"
+//                                     placeholder="Create password *"
+//                                     {...register("password", {
+//                                         required: "Password is required",
+//                                         minLength: {
+//                                             value: 6,
+//                                             message: "Password must be at least 6 characters"
+//                                         },
+//                                         pattern: {
+//                                             value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+//                                             message: "Password must include uppercase, lowercase, number and special character"
+//                                         }
+//                                     })}
+//                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+//                                 />
+//                                 {errors.password && (
+//                                     <span className="text-[#DA3A60] text-sm mt-1">{errors.password.message}</span>
+//                                 )}
+//                             </div>
+                            
+//                             {/* Captcha Section */}
+//                             <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
+//                                 <LoadCanvasTemplate />
+//                                 <div className="flex gap-2">
+//                                     <input
+//                                         type="text"
+//                                         name="captcha"
+//                                         id="signupCaptcha"
+//                                         placeholder="Enter captcha *"
+//                                         className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+//                                         required
+//                                     />
+//                                     <button
+//                                         type="button"
+//                                         onClick={() => handleValidateCaptcha(document.getElementById('signupCaptcha'))}
+//                                         className="px-6 py-3 bg-[#FCBB45] hover:bg-[#FCBB45]/90 text-white font-medium rounded-lg transition-all"
+//                                     >
+//                                         Verify
+//                                     </button>
+//                                 </div>
+//                             </div>
+//                         </div>
+
+//                         {/* Terms and Conditions */}
+//                         <div className="flex items-center">
+//                             <input
+//                                 type="checkbox"
+//                                 id="terms"
+//                                 checked={termsAccepted}
+//                                 onChange={(e) => setTermsAccepted(e.target.checked)}
+//                                 className="w-4 h-4 border-gray-300 rounded text-[#DA3A60] focus:ring-[#DA3A60]"
+//                             />
+//                             <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+//                                 I have read and agree to all{' '}
+//                                 <Link to="/terms" className="text-[#70C5D7] hover:text-[#005482]" target="_blank">
+//                                     Terms & conditions
+//                                 </Link>
+//                             </label>
+//                         </div>
+
+//                         {/* Sign Up Button */}
+//                         <button
+//                             type="submit"
+//                             disabled={disabled || !termsAccepted}
+//                             className="w-full py-3 px-6 bg-[#DA3A60] hover:bg-[#DA3A60]/90 text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+//                         >
+//                             <span>Sign up</span>
+//                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+//                                 <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+//                             </svg>
+//                         </button>
+
+//                         {/* Divider */}
+//                         <div className="relative my-8">
+//                             <div className="absolute inset-0 flex items-center">
+//                                 <div className="w-full border-t border-gray-200"></div>
+//                             </div>
+//                             <div className="relative flex justify-center text-sm">
+//                                 <span className="px-4 bg-white text-gray-500 text-base">OR</span>
+//                             </div>
+//                         </div>
+
+//                         {/* Google Sign In */}
+//                         <SocialLogin />
+
+//                         {/* Sign In Link */}
+//                         <div className="flex items-center justify-between mt-6 text-sm">
+//                             <Link to="/login" className="text-[#005482] hover:text-[#70C5D7] font-medium">
+//                                 Sign in
+//                             </Link>
+//                             <Link to="/forgot-password" className="text-[#005482] hover:text-[#70C5D7]">
+//                                 Lost password?
+//                             </Link>
+//                         </div>
+//                     </form>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SignUp;
+
+
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 import SocialLogin from "../components/SocialLogin";
 import useAxiosPublic from "../hooks/UseAxiosPublic";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import imge1 from '../assets/img-ln-Photoroom.png';
 
 const SignUp = () => {
-  const axiosPublic = useAxiosPublic();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const { createUser, updateUserProfile } = useContext(AuthContext);
-  const navigate = useNavigate();
+    const [disabled, setDisabled] = useState(true);
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const axiosPublic = useAxiosPublic();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-  const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-  const handleImageUpload = async (photo) => {
-    if (!photo) return null;
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, []);
 
-    const formData = new FormData();
-    formData.append("image", photo);
+    const handleValidateCaptcha = (element) => {
+        const captchaValue = element.value;
+        if (validateCaptcha(captchaValue)) {
+            setDisabled(false);
+            Swal.fire({
+                icon: 'success',
+                title: 'Captcha Validated!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } else {
+            setDisabled(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Captcha',
+                text: 'Please try again',
+                confirmButtonText: 'Ok'
+            });
+        }
+    };
 
-    try {
-      const res = await fetch(image_hosting_api, {
-        method: "POST",
-        body: formData,
-      });
-      const imageData = await res.json();
-      return imageData.success ? imageData.data.url : null;
-    } catch (error) {
-      console.error("Image Upload Error:", error);
-      return null;
-    }
-  };
+    const handleImageUpload = async (photo) => {
+        const formData = new FormData();
+        formData.append('image', photo);
 
-  const onSubmit = async (data) => {
-    const photoFile = data.photo?.[0];
-    const uploadedPhotoURL = await handleImageUpload(photoFile);
+        try {
+            const response = await fetch(image_hosting_api, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            return data.data.url;
+        } catch (error) {
+            console.error('Image upload failed:', error);
+            return null;
+        }
+    };
 
-    try {
-      const result = await createUser(data.email, data.password);
-      const loggedUser = result.user;
+    const onSubmit = async (data) => {
+        if (!termsAccepted) {
+            Swal.fire({
+                title: 'Terms & Conditions Required',
+                text: 'Please accept the terms and conditions to continue',
+                icon: 'warning',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
 
-      // await updateUserProfile({
-      //   displayName: String(data.name || ""),
-      //   photoURL: String(uploadedPhotoURL || ""),
-      // });
+        let photoURL = data.photoURL;
+        if (data.photo && data.photo[0]) {
+            photoURL = await handleImageUpload(data.photo[0]);
+            if (!photoURL) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Image Upload Failed',
+                    text: 'Please try again or use a photo URL instead.'
+                });
+                return;
+            }
+        }
 
-      await updateUserProfile(
-  String(data.name || ""),
-  String(uploadedPhotoURL || "")
-);
+        try {
+            const result = await createUser(data.email, data.password);
+            console.log("User Created:", result.user);
 
+            await updateUserProfile(data.name, photoURL);
+            console.log("User profile info updated");
 
-      const userInfo = {
-        uid: loggedUser.uid,
-        name: data.name,
-        email: data.email,
-        photoURL: uploadedPhotoURL || "",
-      };
+            const userInfo = {
+                uid: result.user.uid,
+                name: data.name,
+                email: data.email,
+                photoURL: photoURL,
+                emailVerified: false
+            };
 
-      const res = await axiosPublic.post("/users", userInfo);
+            try {
+                const res = await axiosPublic.post('/users', userInfo);
+                if (res.data.insertedId) {
+                    console.log("User added to the database");
+                    reset();
+                    
+                    // Show success message with verification instructions
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Account Created Successfully!',
+                        html: `
+                            <p>A verification email has been sent to <strong>${data.email}</strong></p>
+                            <p class="mt-2">Please check your email and verify your account to continue.</p>
+                        `,
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate('/login');
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error("Database Error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Database Error',
+                    text: 'Failed to save user information. Please try again.'
+                });
+            }
+        } catch (error) {
+            console.error("Create User Error:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Sign Up Failed',
+                text: error.message
+            });
+        }
+    };
 
-      if (res.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Account Created Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Signup Error:", error);
-      Swal.fire("Error", error.message, "error");
-    }
-  };
+    return (
+        <div className="min-h-screen w-full bg-[#005482] flex fixed inset-0">
+            {/* Left Section with Illustration */}
+            <div className="hidden lg:flex lg:w-1/2 bg-[#70C5D7] items-center justify-center p-12">
+                <div className="max-w-lg">
+                    <h2 className="text-4xl font-bold text-white mb-6">Join <span className="text-[#FCBB45]">LessonPaw</span> Today!</h2>
+                    <p className="text-xl text-white/90">Connect with a community of educators and learners. Share knowledge, discover resources, and grow together.</p>
+                    <div className="mt-8">
+                        <img 
+                            src={imge1} 
+                            alt="Progress Illustration"
+                            className="w-full max-w-md mx-auto"
+                        />
+                    </div>
+                </div>
+            </div>
 
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row items-center gap-8 max-w-6xl w-full">
+            {/* Right Section with Form */}
+            <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-6 overflow-y-auto">
+                <div className="w-full max-w-md space-y-8">
+                    {/* Header */}
+                    <div className="text-center mt-8">
+                        <h1 className="text-3xl font-bold text-[#005482] mb-2">Welcome!</h1>
+                        <p className="text-gray-600">Create your account to get started</p>
+                    </div>
 
-        {/* Left Panel */}
-        <div className="text-center md:text-left text-white max-w-md">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome!</h1>
-          <p className="mb-5 text-gray-200">
-            Join us and explore a world of opportunities. Already have an account?
-          </p>
-          <Link
-            to="/login"
-            className="inline-block px-6 py-2 rounded-md border border-white text-white hover:bg-white hover:text-blue-800 transition duration-300"
-          >
-            Sign In
-          </Link>
+                    {/* Sign Up Form */}
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                        <div className="space-y-4">
+                            {/* Name Input */}
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Your name *"
+                                    {...register("name", { required: "Name is required" })}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+                                />
+                                {errors.name && (
+                                    <span className="text-[#DA3A60] text-sm mt-1">{errors.name.message}</span>
+                                )}
+                            </div>
+
+                            {/* Photo Upload */}
+                            <div className="space-y-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Profile Photo
+                                </label>
+                                <div className="space-y-2">
+                                    <div className="flex items-center space-x-2">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            {...register("photo")}
+                                            className="hidden"
+                                            id="photo-upload"
+                                        />
+                                        <label
+                                            htmlFor="photo-upload"
+                                            className="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#70C5D7]"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            Choose Photo
+                                        </label>
+                                        <span className="text-sm text-gray-500">or</span>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter photo URL"
+                                        {...register("photoURL")}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482] text-sm"
+                                    />
+                                    <p className="text-xs text-gray-500">
+                                        Upload a photo or provide an image URL
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Email Input */}
+                            <div>
+                                <input
+                                    type="email"
+                                    placeholder="Your email address *"
+                                    {...register("email", { required: "Email is required" })}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+                                />
+                                {errors.email && (
+                                    <span className="text-[#DA3A60] text-sm mt-1">{errors.email.message}</span>
+                                )}
+                            </div>
+
+                            {/* Password Input */}
+                            <div>
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Create password *"
+                                        {...register("password", {
+                                            required: "Password is required",
+                                            minLength: {
+                                                value: 6,
+                                                message: "Password must be at least 6 characters"
+                                            },
+                                            pattern: {
+                                                value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                                                message: "Password must include uppercase, lowercase, number and special character"
+                                            }
+                                        })}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                    >
+                                        {showPassword ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clipRule="evenodd" />
+                                                <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                {errors.password && (
+                                    <span className="text-[#DA3A60] text-sm mt-1">{errors.password.message}</span>
+                                )}
+                            </div>
+                            
+                            {/* Captcha Section */}
+                            <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
+                                <LoadCanvasTemplate />
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        name="captcha"
+                                        id="signupCaptcha"
+                                        placeholder="Enter captcha *"
+                                        className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#70C5D7] text-[#005482]"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleValidateCaptcha(document.getElementById('signupCaptcha'))}
+                                        className="px-6 py-3 bg-[#FCBB45] hover:bg-[#FCBB45]/90 text-white font-medium rounded-lg transition-all"
+                                    >
+                                        Verify
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Terms and Conditions */}
+                        <div className="flex items-center">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                checked={termsAccepted}
+                                onChange={(e) => setTermsAccepted(e.target.checked)}
+                                className="w-4 h-4 border-gray-300 rounded text-[#DA3A60] focus:ring-[#DA3A60]"
+                            />
+                            <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+                                I have read and agree to all{' '}
+                                <Link to="/terms" className="text-[#70C5D7] hover:text-[#005482]" target="_blank">
+                                    Terms & conditions
+                                </Link>
+                            </label>
+                        </div>
+
+                        {/* Sign Up Button */}
+                        <button
+                            type="submit"
+                            disabled={disabled || !termsAccepted}
+                            className="w-full py-3 px-6 bg-[#DA3A60] hover:bg-[#DA3A60]/90 text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        >
+                            <span>Sign up</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+
+                        {/* Google Sign In */}
+                        <SocialLogin />
+
+                        {/* Sign In Link */}
+                        <div className="flex items-center justify-between mt-6 text-sm">
+                            <Link to="/login" className="text-[#005482] hover:text-[#70C5D7] font-medium">
+                                Sign in
+                            </Link>
+                            <Link to="/forgot-password" className="text-[#005482] hover:text-[#70C5D7]">
+                                Lost password?
+                            </Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        {/* Sign Up Form */}
-        <div className="card w-full max-w-md bg-white shadow-xl rounded-lg">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body p-6 space-y-4">
-            <h2 className="text-2xl font-bold text-center text-blue-800">Create Account</h2>
-
-            {/* Social Login */}
-            <SocialLogin />
-            <div className="divider text-gray-400 text-sm">or use your email</div>
-
-            {/* Name */}
-            <div className="form-control">
-              <label className="label text-sm text-blue-800">Name</label>
-              <input
-                type="text"
-                placeholder="Full Name"
-                {...register("name", { required: "Name is required" })}
-                className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
-              />
-              {errors.name && <span className="text-red-600 text-sm">{errors.name.message}</span>}
-            </div>
-
-            {/* Email */}
-            <div className="form-control">
-              <label className="label text-sm text-blue-800">Email</label>
-              <input
-                type="email"
-                placeholder="Email"
-                {...register("email", { required: "Email is required" })}
-                className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
-              />
-              {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
-            </div>
-
-            {/* Password */}
-            <div className="form-control">
-              <label className="label text-sm text-blue-800">Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: { value: 6, message: "Min 6 characters" },
-                  maxLength: { value: 20, message: "Max 20 characters" },
-                  pattern: {
-                    value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                    message: "Must include uppercase, lowercase, number & symbol",
-                  },
-                })}
-                className="input input-bordered bg-white border-blue-300 focus:ring-blue-500"
-              />
-              {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
-              <label className="label">
-                <Link to="/forgot-password" className="label-text-alt text-sm text-blue-600 hover:underline">
-                  Forgot password?
-                </Link>
-              </label>
-            </div>
-
-            {/* Photo (Optional) */}
-            <div className="form-control">
-              <label className="label text-sm text-blue-800">
-                Profile Photo <span className="text-gray-500">(optional)</span>
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                {...register("photo")}
-                className="file-input file-input-bordered w-full bg-white border-blue-300"
-              />
-            </div>
-
-            {/* Submit */}
-            <button type="submit" className="btn bg-blue-600 hover:bg-blue-700 text-white mt-2 w-full">
-              Sign Up
-            </button>
-
-            {/* Redirect */}
-            <p className="text-sm text-center text-gray-600">
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">Sign In</Link>
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SignUp;

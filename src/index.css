@@ -76,3 +76,18 @@ p {
 .bg-info {
   background-color: var(--color-info);
 }
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #FFFFFF;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-top;
+}
+
+@keyframes blink {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}

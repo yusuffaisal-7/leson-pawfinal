@@ -454,4 +454,3 @@ const JoinTeacher = () => {
 };
 
 export default JoinTeacher;
-
