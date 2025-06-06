@@ -93,7 +93,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/blog"
+                  to="/blogs"
                   className="hover:text-[#DA3A60] transition-colors"
                 >
                   {translate("blog")}

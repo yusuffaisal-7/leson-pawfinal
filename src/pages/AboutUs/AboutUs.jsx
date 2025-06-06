@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGraduationCap, FaUsers, FaChalkboardTeacher, FaGlobe, FaLinkedin, 
   FaTwitter, FaEnvelope, FaCheckCircle, FaStar, FaClock, FaShieldAlt, 
@@ -6,6 +6,7 @@ import { FaGraduationCap, FaUsers, FaChalkboardTeacher, FaGlobe, FaLinkedin,
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import { useLanguage } from '../../providers/LanguageProvider';
+import { AuthContext } from '../../providers/AuthProvider';
 import imge1 from '../../assets/AboutUs3.jpg';
 import imge2 from '../../assets/AboutUs2.jpg';
 import imge3 from '../../assets/AboutUs.jpg';
@@ -73,6 +74,7 @@ const SectionHeader = ({ title, subtitle, isDark = false }) => {
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState('students');
   const { translate } = useLanguage();
+  const { user } = useContext(AuthContext);
 
   const stats = [
     { number: 5000, label: translate('studentsHelped'), icon: <FaGraduationCap />, description: translate('successfulLearners') },
@@ -484,32 +486,34 @@ const AboutUs = () => {
       </section>
 
       {/* Call-to-Action */}
-      <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7]">
-          <div className="absolute inset-0 bg-[url('/path-to-pattern.png')] opacity-10"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">{translate('readyToTransform')}</h2>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8">
-              {translate('joinThousands')}
-            </p>
-            <div className="flex justify-center">
-              <Link
-                to="/signup"
-                className="inline-block bg-[#DA3A60] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-medium hover:bg-[#DA3A60]/90 transition-colors text-base sm:text-lg"
-              >
-                {translate('getStarted')}
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {!user && (
+        <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#005482] to-[#70C5D7]">
+            <div className="absolute inset-0 bg-[url('/path-to-pattern.png')] opacity-10"></div>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">{translate('readyToTransform')}</h2>
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8">
+                {translate('joinThousands')}
+              </p>
+              <div className="flex justify-center">
+                <Link
+                  to="/signup"
+                  className="inline-block bg-[#DA3A60] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-medium hover:bg-[#DA3A60]/90 transition-colors text-base sm:text-lg"
+                >
+                  {translate('getStarted')}
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };
